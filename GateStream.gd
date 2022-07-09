@@ -1,0 +1,3 @@
+tool
+extends StreamInterface
+class_name GateStream

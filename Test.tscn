@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://core/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://core/generics/Button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://core/io_stream/Switch.gd" type="Script" id=3]
+
+[node name="Spatial" type="Spatial"]
+pause_mode = 2
+
+[node name="Room" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.00745, 0 )
+use_collision = true
+invert_faces = true
+width = 21.9589
+height = 6.0
+depth = 17.1518
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.18868, 1.4472, -0.76876 )
+move_speed = 8.0
+gravity_falling = 55.0
+gravity_rising = 65.0
+gravity_jump_force = 12.0
+
+[node name="ButtonGroup" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98228, 0, 0 )
+
+[node name="Switch" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98228, 0, 0 )
+script = ExtResource( 3 )
+general/immutable = true
+general/enabled = null
+input/stream_mode = null
+input/duration = null
+output/targets = null
