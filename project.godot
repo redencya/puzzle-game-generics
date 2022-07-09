@@ -39,6 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="3DGame"
+run/main_scene="res://Test.tscn"
 config/icon="res://icon.png"
 
 [autoload]

@@ -4,3 +4,8 @@
 
 [node name="StreamInterface" type="Spatial"]
 script = ExtResource( 1 )
+general/immutable = true
+general/enabled = null
+input/stream_mode = null
+input/duration = null
+output/targets = null

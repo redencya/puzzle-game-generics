@@ -14,7 +14,7 @@ var gravity_falling = 20
 var gravity_rising = 40
 var gravity_jump_force = 10
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("fullscreen"):
 		OS.set_window_fullscreen(!OS.is_window_fullscreen())
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED * int(OS.is_window_fullscreen()))
@@ -176,3 +176,6 @@ func _get_property_list() -> Array:
 	})
 	
 	return properties
+
+
+

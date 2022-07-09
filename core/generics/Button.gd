@@ -72,3 +72,12 @@ func _get_property_list() -> Array:
 	properties.append(._get_property_list())
 	
 	return properties
+
+
+func _on_Transmitter_area_entered(area: Area) -> void:
+	if area.name == "Receiver":
+		print("Power received!")
+
+func _on_Transmitter_area_exited(area: Area) -> void:
+	if area.name == "Receiver":
+		print("Power lost!")
