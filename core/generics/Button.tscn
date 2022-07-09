@@ -1,9 +1,47 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://core/generics/Button.gd" type="Script" id=1]
 
+[sub_resource type="Animation" id=13]
+resource_name = "Presseed"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("../../Button/Mesh:mesh:surface_1/material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 0.431373, 1, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../../Button/Mesh:mesh:surface_1/material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ) ]
+}
+
 [sub_resource type="SpatialMaterial" id=8]
 albedo_color = Color( 1, 0, 0, 1 )
+metallic = 0.35
+metallic_specular = 0.8
+clearcoat_enabled = true
+clearcoat = 1.0
+clearcoat_gloss = 0.85
+anisotropy_enabled = true
+anisotropy = 0.0
 
 [sub_resource type="ArrayMesh" id=4]
 resource_name = "Button_mesh"
@@ -55,19 +93,25 @@ points = PoolVector3Array( 0, -0.05, -0.5, -0.0490407, -0.05, -0.497651, 0, 0.05
 radius = 1.08719
 
 [node name="ButtonGroup" type="Spatial"]
+transform = Transform( 0.999999, 0.0011695, -0.00115684, -0.00117019, 0.999999, -0.000582554, 0.00115614, 0.000583931, 0.999999, 0, 0, 0 )
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": "Defunct as of right now due to the lack of proper RigidBodies
 "
 }
 functionality/input_type = 1
-functionality/weight_type = null
+functionality/weight_type = 2
 cosmetic/accent_color = Color( 1, 0, 0.282353, 1 )
 general/immutable = true
 general/enabled = null
 input/stream_mode = null
 input/duration = null
 output/targets = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../ExternalFactorChecker/CollisionShape")
+anims/Presseed = SubResource( 13 )
+anims/RESET = SubResource( 14 )
 
 [node name="Generic6DOFJoint" type="Generic6DOFJoint" parent="."]
 nodes/node_a = NodePath("../Button")

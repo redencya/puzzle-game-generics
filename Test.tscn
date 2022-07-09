@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://core/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://core/generics/Button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://RigidBody.gd" type="Script" id=3]
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.721569, 0.74902, 0.819608, 1 )
 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 1, 0.27451, 0, 1 )
@@ -59,30 +62,63 @@ tracks/0/keys = {
 [node name="Spatial" type="Spatial"]
 pause_mode = 2
 
-[node name="Room" type="CSGBox" parent="."]
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+use_collision = true
+
+[node name="Room" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.00745, 0 )
 use_collision = true
 invert_faces = true
 width = 21.9589
 height = 6.0
 depth = 17.1518
+material = SubResource( 6 )
+
+[node name="Room2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.69363, 3.00745, 0 )
+operation = 2
+snap = 0.038
+use_collision = true
+invert_faces = true
+width = 16.5239
+height = 6.0
+depth = 1.11216
+material = SubResource( 6 )
+
+[node name="Room3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5961, 3.00745, 0 )
+operation = 2
+snap = 0.038
+use_collision = true
+invert_faces = true
+width = 13.0604
+height = 6.0
+depth = 1.11216
+material = SubResource( 6 )
+
+[node name="Room4" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.92978, 7.09582, 0 )
+operation = 2
+snap = 0.038
+use_collision = true
+invert_faces = true
+width = 8.73543
+height = 4.27752
+depth = 1.11216
+material = SubResource( 6 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.18868, 1.4472, -0.76876 )
+transform = Transform( -0.120795, 0, -0.992677, 0, 1, 0, 0.992677, 0, -0.120795, -5.61837, 1.4472, -5.45546 )
 collision_mask = 3
 move_speed = 8.0
 gravity_falling = 55.0
 gravity_rising = 65.0
 gravity_jump_force = 12.0
 
-[node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.21971, 1.60215, 0 )
-shadow_enabled = true
-
 [node name="ButtonGroup" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98228, 0.21582, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98228, 0.21582, -4.95333 )
 
-[node name="Generic6DOFJoint" parent="ButtonGroup" index="0"]
+[node name="Generic6DOFJoint" parent="ButtonGroup" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.618057, 0 )
 linear_limit_x/enabled = false
 angular_limit_x/enabled = false
@@ -93,7 +129,7 @@ angular_limit_y/enabled = false
 linear_limit_z/enabled = false
 angular_limit_z/enabled = false
 
-[node name="Button" parent="ButtonGroup" index="1"]
+[node name="Button" parent="ButtonGroup" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.245936, 0 )
 collision_layer = 2
 collision_mask = 2
@@ -105,16 +141,17 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 
-[node name="Foundation" parent="ButtonGroup" index="2"]
+[node name="Foundation" parent="ButtonGroup" index="3"]
 collision_layer = 1
 collision_mask = 1
 
-[node name="ButtonTick" parent="ButtonGroup" index="3"]
+[node name="ButtonTick" parent="ButtonGroup" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0148105, 0 )
 collision_layer = 2
 collision_mask = 2
 
 [node name="RigidBody" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.188762, -3.95451 )
 collision_layer = 11
 collision_mask = 3
 mass = 20.0
@@ -133,6 +170,36 @@ shape = SubResource( 2 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="RigidBody"]
 anims/ColorChange = SubResource( 4 )
 anims/RESET = SubResource( 5 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.971457, 5.3908, -4.1358 )
+shadow_enabled = true
+spot_range = 9.35878
+
+[node name="SpotLight2" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 7.7975, 5.3908, -4.1358 )
+shadow_enabled = true
+spot_range = 9.35878
+
+[node name="SpotLight3" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -7.87887, 5.37487, -4.15936 )
+shadow_enabled = true
+spot_range = 9.35878
+
+[node name="SpotLight4" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.971457, 5.3908, 4.62057 )
+shadow_enabled = true
+spot_range = 9.35878
+
+[node name="SpotLight5" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 7.7975, 5.3908, 4.62057 )
+shadow_enabled = true
+spot_range = 9.35878
+
+[node name="SpotLight6" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -7.87887, 5.37487, 4.59702 )
+shadow_enabled = true
+spot_range = 9.35878
 
 [connection signal="input_event" from="RigidBody" to="RigidBody" method="_on_RigidBody_input_event"]
 [connection signal="mouse_entered" from="RigidBody" to="RigidBody" method="_on_RigidBody_mouse_entered"]

@@ -76,8 +76,8 @@ func _get_property_list() -> Array:
 
 func _on_Transmitter_area_entered(area: Area) -> void:
 	if area.name == "Receiver":
-		print("Power received!")
+		$AnimationPlayer.play("Presseed")
 
 func _on_Transmitter_area_exited(area: Area) -> void:
 	if area.name == "Receiver":
-		print("Power lost!")
+		$AnimationPlayer.play_backwards("Presseed")
