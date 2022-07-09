@@ -1,8 +1,19 @@
 extends RayCast
 
+var current_body : RigidBody = null
+onready var Pin = $PinJoint
+
 func _process(delta: float) -> void:
-	get_collider()
+	var new_body = get_collider()
+	if current_body != new_body:
+		if (current_body):
+			current_body.set_highlight(false)
+		current_body = new_body
+		if (current_body):
+			current_body.set_highlight(true)
 
 func _input(event: InputEvent) -> void:
-	if get_collider() && event.is_action_pressed("shoot"):
-		get_collider().global_transform = $PinJoint.global_transform
+	if current_body && event.is_action_pressed("shoot"):
+		current_body.set_mode(RigidBody.MODE_STATIC)
+		Pin.add_child(current_body)
+		current_body.global_transform = Pin.global_transform
