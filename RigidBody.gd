@@ -16,9 +16,8 @@ func _ready() -> void:
 #	pass
 
 
-func _on_RigidBody_mouse_entered() -> void:
-	$AnimationPlayer.play("ColorChange")
-
-func _on_RigidBody_mouse_exited() -> void:
-	$AnimationPlayer.play_backwards("ColorChange")
-
+func set_highlight(value : bool) -> void:
+	if value:
+		$AnimationPlayer.play("ColorChange")
+	else:
+		$AnimationPlayer.play_backwards("ColorChange")
