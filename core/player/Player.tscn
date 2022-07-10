@@ -39,8 +39,8 @@ gravity_jump_force = 10
 
 [node name="Solidifer" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.735033, 0 )
-collision_layer = 16
-collision_mask = 16
+collision_layer = 0
+collision_mask = 2
 script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Solidifer"]
