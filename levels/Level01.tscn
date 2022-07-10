@@ -19,18 +19,24 @@ uv1_offset = Vector3( 10, 0, 0 )
 uv1_triplanar = true
 
 [sub_resource type="ProceduralSky" id=2]
-sky_top_color = Color( 0.647059, 0.917647, 0.945098, 1 )
+sky_top_color = Color( 0.0823529, 0.0705882, 0.152941, 1 )
+sky_horizon_color = Color( 0, 0.0705882, 0.12549, 1 )
 sky_curve = 0.32445
+ground_bottom_color = Color( 0, 0, 0, 1 )
+ground_horizon_color = Color( 0.117647, 0.117647, 0.117647, 1 )
 ground_curve = 0.15455
 sun_latitude = 76.47
 
 [sub_resource type="Environment" id=3]
 background_mode = 2
 background_sky = SubResource( 2 )
-background_energy = 0.75
-ambient_light_energy = 0.8
-ambient_light_sky_contribution = 0.9
-tonemap_mode = 3
+ambient_light_color = Color( 0, 0.6, 1, 1 )
+ambient_light_energy = 2.5
+fog_enabled = true
+fog_color = Color( 0.454902, 0.482353, 0.509804, 1 )
+tonemap_mode = 4
+tonemap_exposure = 0.68
+tonemap_white = 0.8
 ssao_enabled = true
 ssao_radius = 6.0
 ssao_intensity = 0.2
@@ -39,32 +45,13 @@ ssao_intensity2 = 0.5
 ssao_bias = 0.046
 ssao_color = Color( 0.027451, 0, 0.278431, 1 )
 ssao_quality = 2
-glow_enabled = true
-glow_strength = 0.59
-glow_bloom = 0.21
+glow_blend_mode = 1
+adjustment_enabled = true
+adjustment_contrast = 0.85
+adjustment_saturation = 0.9
 
 [node name="Spatial" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-
-[node name="SpotLight" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.8, -1.74846e-07 )
-light_energy = 0.5
-shadow_enabled = true
-shadow_bias = 0.05
-spot_range = 21.119
-spot_attenuation = 1.8025
-spot_angle = 45.8
-spot_angle_attenuation = 1.03526
-
-[node name="SpotLight2" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.8, -11.8086 )
-light_energy = 0.5
-shadow_enabled = true
-shadow_bias = 0.05
-spot_range = 21.119
-spot_attenuation = 1.8025
-spot_angle = 46.8415
-spot_angle_attenuation = 1.03526
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34957, 3.0512 )
@@ -98,7 +85,7 @@ material = SubResource( 1 )
 [node name="Group" type="CSGCombiner" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 material_override = SubResource( 1 )
-snap = 0.1
+lightmap_scale = 3
 use_collision = true
 collision_mask = 0
 
@@ -151,17 +138,39 @@ transform = Transform( 0.999999, 0.0011695, -0.00115684, -0.00117019, 0.999999, 
 relations/output = [ NodePath("../DoorStream") ]
 
 [node name="OmniLight" type="OmniLight" parent="ButtonGroup"]
-transform = Transform( 0.999998, -0.00117017, 0.00115616, 0.00116952, 0.999999, 0.000583907, -0.00115682, -0.000582578, 0.999999, 0.00839901, 0.296076, -0.00317979 )
-light_color = Color( 0, 0.694118, 1, 1 )
+transform = Transform( 0.999998, -0.00117018, 0.00115616, 0.00116952, 0.999999, 0.000583908, -0.00115682, -0.000582579, 0.999999, 0.258109, 0.546366, -0.00361466 )
+light_color = Color( 0, 0.294118, 0.427451, 1 )
 light_energy = 3.445
-light_specular = 3.403
-light_cull_mask = 4294967263
-omni_range = 2.0
-omni_attenuation = 2.82843
+light_indirect_energy = 1.092
+light_specular = 0.0
+omni_range = 40.407
+omni_attenuation = 1.56917
 
 [node name="DoorStream" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5.5 )
 relations/input = [  ]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.75, 2.25 )
+shadow_enabled = true
+omni_range = 12.948
+omni_attenuation = 1.1487
+omni_shadow_mode = 0
+
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.75, -2.975 )
+visible = false
+shadow_enabled = true
+omni_range = 12.948
+omni_attenuation = 1.1487
+omni_shadow_mode = 0
+
+[node name="OmniLight4" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.75, -14.225 )
+shadow_enabled = true
+omni_range = 12.948
+omni_attenuation = 1.1487
+omni_shadow_mode = 0
+
+[node name="Sky" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
