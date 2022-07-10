@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://core/player/Player.gd" type="Script" id=1]
-[ext_resource path="res://crosshair.png" type="Texture" id=2]
+[ext_resource path="res://assets/hud/crosshair_on.png" type="Texture" id=2]
 [ext_resource path="res://core/player/ObjectDetection.gd" type="Script" id=3]
+[ext_resource path="res://assets/hud/crosshair_off.png" type="Texture" id=4]
+[ext_resource path="res://core/player/Crosshair.gd" type="Script" id=5]
 
 [sub_resource type="CapsuleMesh" id=1]
 radius = 0.5
@@ -30,12 +32,14 @@ gravity_jump_force = 10
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+[node name="Crosshair" type="CenterContainer" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+script = ExtResource( 5 )
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer"]
+[node name="CrosshairOn" type="TextureRect" parent="CanvasLayer/Crosshair"]
+visible = false
 margin_left = 936.0
 margin_top = 516.0
 margin_right = 984.0
@@ -45,14 +49,21 @@ mouse_filter = 2
 texture = ExtResource( 2 )
 stretch_mode = 1
 
+[node name="CrosshairOff" type="TextureRect" parent="CanvasLayer/Crosshair"]
+margin_left = 936.0
+margin_top = 516.0
+margin_right = 984.0
+margin_bottom = 564.0
+rect_min_size = Vector2( 48, 48 )
+mouse_filter = 2
+texture = ExtResource( 4 )
+stretch_mode = 1
+
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.675726, -0.340189 )
 current = true
 fov = 90.0
 size = 0.15
-
-[node name="PinJoint" type="SpringArm" parent="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.50018 )
 
 [node name="RayCast" type="RayCast" parent="Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3 )
@@ -60,6 +71,9 @@ enabled = true
 cast_to = Vector3( 0, 0, -1.2 )
 collision_mask = 8
 script = ExtResource( 3 )
+
+[node name="PinJoint" type="SpringArm" parent="Camera/RayCast"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.20018 )
 
 [node name="Capsule" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -85,3 +99,5 @@ axis_lock_angular_z = true
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.813105, 0 )
 shape = SubResource( 3 )
+
+[connection signal="highlight_object" from="Camera/RayCast" to="CanvasLayer/Crosshair" method="_on_RayCast_highlight_object"]
