@@ -117,10 +117,23 @@ anims/RESET = SubResource( 14 )
 [node name="Generic6DOFJoint" type="Generic6DOFJoint" parent="."]
 nodes/node_a = NodePath("../Button")
 nodes/node_b = NodePath("../ButtonTick")
+collision/exclude_nodes = false
+linear_limit_x/enabled = false
+angular_limit_x/enabled = false
 linear_spring_y/enabled = true
+linear_spring_y/stiffness = 1.5
+angular_limit_y/enabled = false
+linear_limit_z/enabled = false
+angular_limit_z/enabled = false
 
 [node name="Button" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.218949, 0 )
+mass = 0.2
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 
 [node name="Mesh" type="MeshInstance" parent="Button"]
 mesh = SubResource( 4 )

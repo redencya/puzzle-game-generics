@@ -258,7 +258,7 @@ gravity_jump_force = 12.0
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.06566, 0.837245, -4.6496 )
 general/enabled = true
 input/duration = [ NodePath("../ButtonLeft"), NodePath("../ButtonRight") ]
-relations/input = [ NodePath("../ANDGate") ]
+relations/input = [ NodePath("../ButtonLeft"), NodePath("../ButtonRight") ]
 relations/output = [ NodePath("../StreamInterface2") ]
 
 [node name="ButtonLeft" parent="." instance=ExtResource( 2 )]
@@ -311,7 +311,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.15705, 0.23689, -2.13453 )
 functionality/input_type = null
 functionality/click_type = null
 cosmetic/accent_color = null
-relations/output = [  ]
+relations/output = [ NodePath("../ANDGate") ]
 
 [node name="AnimationPlayer" parent="ButtonRight" index="0"]
 anims/Pressed = SubResource( 12 )
@@ -358,7 +358,7 @@ transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -9.0677
 functionality/input_type = null
 functionality/click_type = null
 cosmetic/accent_color = null
-relations/output = [  ]
+relations/output = [ NodePath("../StreamInterface") ]
 
 [node name="AnimationPlayer" parent="ButtonLeft2" index="0"]
 anims/Pressed = SubResource( 17 )
@@ -405,7 +405,7 @@ transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -9.0656
 functionality/input_type = null
 functionality/click_type = null
 cosmetic/accent_color = null
-relations/output = [  ]
+relations/output = [ NodePath("../StreamInterface") ]
 
 [node name="AnimationPlayer" parent="ButtonRight2" index="0"]
 anims/Pressed = SubResource( 20 )
@@ -449,7 +449,7 @@ collision_mask = 2
 
 [node name="DoorStream" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39651, 2.3788, 0 )
-relations/input = [  ]
+relations/input = [ NodePath("../StreamInterface2") ]
 
 [node name="RigidBody" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.18575, -0.0956019, -7.36274 )
@@ -534,7 +534,7 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.0544
 logic/operator_type = 1
 general/enabled = true
 input/duration = [ NodePath("../ButtonLeft2"), NodePath("../ButtonRight2") ]
-relations/input = [ NodePath("../StreamInterface") ]
+relations/input = [ NodePath("../ButtonLeft2"), NodePath("../ButtonRight2") ]
 relations/output = [ NodePath("../StreamInterface2") ]
 
 [node name="StreamInterface2" parent="." instance=ExtResource( 5 )]
@@ -542,8 +542,8 @@ transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 2.16402
 logic/operator_type = 2
 general/enabled = true
 input/duration = [ NodePath("../StreamInterface"), NodePath("../ANDGate") ]
-relations/input = [  ]
-relations/output = [  ]
+relations/input = [ NodePath("../StreamInterface2") ]
+relations/output = [ NodePath("../DoorStream") ]
 
 [connection signal="input_event" from="RigidBody" to="RigidBody" method="_on_RigidBody_input_event"]
 [connection signal="mouse_entered" from="RigidBody" to="RigidBody" method="_on_RigidBody_mouse_entered"]

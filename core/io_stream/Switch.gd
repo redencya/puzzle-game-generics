@@ -103,7 +103,7 @@ func _get_property_list() -> Array:
 		name = "general/type",
 		type = TYPE_INT,
 		hint = PROPERTY_HINT_ENUM,
-		hint_string = "Source, Sink, Transformative"
+		hint_string = "Source,Sink,Transformative"
 	})
 	
 	

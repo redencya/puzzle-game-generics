@@ -8,6 +8,7 @@ signal highlight_object(value)
 var hold_mode: bool = false
 
 func _process(delta: float) -> void:
+	get_collider()
 	emit_signal("highlight_object", get_collider() != null)
 
 func _physics_process(delta: float) -> void:
