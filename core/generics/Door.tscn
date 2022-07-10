@@ -88,8 +88,7 @@ input/duration = null
 relations/input = null
 
 [node name="DoorWingA" type="RigidBody" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_mask = 15
 mode = 1
 
 [node name="Mesh" type="MeshInstance" parent="DoorWingA"]
@@ -103,8 +102,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49725, 0, 0 )
 shape = SubResource( 2 )
 
 [node name="DoorWingB" type="RigidBody" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_mask = 15
 mode = 3
 
 [node name="Mesh" type="MeshInstance" parent="DoorWingB"]
