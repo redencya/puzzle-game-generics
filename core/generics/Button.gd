@@ -73,11 +73,14 @@ func _get_property_list() -> Array:
 	
 	return properties
 
-
 func _on_Transmitter_area_entered(area: Area) -> void:
 	if area.name == "Receiver":
-		$AnimationPlayer.play("Presseed")
+		for target in output:
+			connect("stream_input", get_node(target), "_input_stream_recieved", [], CONNECT_REFERENCE_COUNTED)
+			emit_signal("stream_input", true, name)
 
 func _on_Transmitter_area_exited(area: Area) -> void:
 	if area.name == "Receiver":
-		$AnimationPlayer.play_backwards("Presseed")
+		for target in output:
+			connect("stream_input", get_node(target), "_input_stream_recieved", [], CONNECT_REFERENCE_COUNTED)
+			emit_signal("stream_input", false, name)

@@ -1,0 +1,122 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://DoorStream.gd" type="Script" id=1]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 3, 5, 0.5 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( -1.5, -2.5, -0.25, -1.5, -2.5, 0.25, -1.5, 2.5, -0.25, 1.5, -2.5, -0.25, 1.5, -2.5, 0.25, -1.5, 2.5, 0.25, 1.5, 2.5, -0.25, 1.5, 2.5, 0.25 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( -1.5, -2.5, -0.25, -1.5, -2.5, 0.25, -1.5, 2.5, -0.25, 1.5, -2.5, -0.25, 1.5, -2.5, 0.25, -1.5, 2.5, 0.25, 1.5, 2.5, -0.25, 1.5, 2.5, 0.25 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "Open"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("DoorWingA:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 2.5, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DoorWingB:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -2.5, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("DoorWingA:linear_velocity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DoorWingA:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DoorWingB:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[node name="DoorStream" type="Spatial"]
+script = ExtResource( 1 )
+general/immutable = true
+general/enabled = null
+general/type = 1
+input/stream_mode = null
+input/duration = null
+relations/input = null
+
+[node name="DoorWingA" type="RigidBody" parent="."]
+collision_layer = 2
+collision_mask = 2
+mode = 1
+
+[node name="Mesh" type="MeshInstance" parent="DoorWingA"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49725, 0, 0 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="DoorWingA"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49725, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="DoorWingB" type="RigidBody" parent="."]
+collision_layer = 2
+collision_mask = 2
+mode = 3
+
+[node name="Mesh" type="MeshInstance" parent="DoorWingB"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.50275, 0, 0 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="DoorWingB"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.50275, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Open = SubResource( 4 )
+anims/RESET = SubResource( 5 )

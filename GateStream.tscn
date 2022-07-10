@@ -1,11 +1,152 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://GateStream.gd" type="Script" id=1]
 
+[sub_resource type="PrismMesh" id=1]
+left_to_right = 0.0
+size = Vector3( 2, 1, 2 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "InputA"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 0, 1, 0.133333, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "InputB"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("../InputVisualB:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 0.14902, 1, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Outcome"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("../OutcomeVisual:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 0.243137, 1, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../InputVisualB:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../OutcomeVisual:material:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ) ]
+}
+
+[sub_resource type="SpatialMaterial" id=2]
+resource_local_to_scene = true
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=3]
+resource_local_to_scene = true
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=4]
+resource_local_to_scene = true
+albedo_color = Color( 1, 0, 0, 1 )
+
 [node name="StreamInterface" type="Spatial"]
 script = ExtResource( 1 )
+logic/operator_type = 0
 general/immutable = true
 general/enabled = null
+general/type = 2
 input/stream_mode = null
 input/duration = null
-output/targets = null
+relations/input = null
+relations/output = null
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000226498, -0.00963891, 0.0048852 )
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+
+[node name="CSGMesh" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( -4.37114e-08, -4.37114e-08, 1, -1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, -4.37114e-08, 2.54968e-08, 1.04076, 0.523971 )
+operation = 2
+mesh = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../InputVisualA")
+anims/InputA = SubResource( 5 )
+anims/InputB = SubResource( 6 )
+anims/Outcome = SubResource( 8 )
+anims/RESET = SubResource( 7 )
+
+[node name="InputVisualA" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530986, 0.967431, -0.24329 )
+radius = 0.3
+material = SubResource( 2 )
+
+[node name="InputVisualB" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.541848, 0.967431, -0.24329 )
+radius = 0.3
+material = SubResource( 3 )
+
+[node name="OutcomeVisual" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0208262, 0.50368, 0.738181 )
+radius = 0.3
+material = SubResource( 4 )

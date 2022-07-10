@@ -103,10 +103,11 @@ functionality/input_type = 1
 functionality/weight_type = 2
 cosmetic/accent_color = Color( 1, 0, 0.282353, 1 )
 general/immutable = true
-general/enabled = null
+general/enabled = false
+general/type = 0
 input/stream_mode = null
 input/duration = null
-output/targets = null
+relations/output = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../ExternalFactorChecker/CollisionShape")

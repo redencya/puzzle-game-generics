@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://core/generics/Button.gd"
 }, {
 "base": "StreamInterface",
+"class": "DoorStream",
+"language": "GDScript",
+"path": "res://DoorStream.gd"
+}, {
+"base": "StreamInterface",
 "class": "GateStream",
 "language": "GDScript",
 "path": "res://GateStream.gd"
@@ -31,6 +36,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ButtonStream": "",
+"DoorStream": "",
 "GateStream": "",
 "Player": "",
 "StreamInterface": "res://core/io_stream/io-icon.svg"

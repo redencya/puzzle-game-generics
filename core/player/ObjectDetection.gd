@@ -1,22 +1,35 @@
 extends RayCast
 
 var current_body : RigidBody = null
-onready var Pin = $PinJoint
+onready var pivot = $Position3D
 
 signal highlight_object(value)
 
-func _process(delta: float) -> void:
-	var new_body = get_collider()
-	if current_body != new_body:
-		if (current_body):
-			current_body.set_highlight(false)
-		current_body = new_body
-		if (current_body):
-			current_body.set_highlight(true)
-		emit_signal("highlight_object", current_body)
+var hold_mode: bool = false
 
+func _process(delta: float) -> void:
+	emit_signal("highlight_object", get_collider() != null)
+
+func _physics_process(delta: float) -> void:
+	hold_object(hold_mode, current_body)
+		
+func hold_object(input, object):
+	if !(object is RigidBody): return
+	if input:
+		object.global_transform.origin = pivot.global_transform.origin
+	else:
+		object.set_mode(RigidBody.MODE_RIGID)
+		object.collision_mask = 3
+		
 func _input(event: InputEvent) -> void:
-	if current_body && event.is_action_pressed("shoot"):
-		current_body.set_mode(RigidBody.MODE_STATIC)
-		Pin.add_child(current_body)
-		current_body.global_transform = Pin.global_transform
+	if event.is_action_pressed("shoot"):
+		if get_collider() && !hold_mode:
+			current_body = get_collider()
+			hold_mode = true
+			current_body.set_mode(RigidBody.MODE_KINEMATIC)
+			current_body.collision_mask = 0
+		elif hold_mode:
+			current_body.set_mode(RigidBody.MODE_RIGID)
+			current_body.collision_mask = 3
+			current_body = null
+			hold_mode = false
