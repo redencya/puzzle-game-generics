@@ -102,6 +102,13 @@ shoot={
  ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Environment"
+3d_physics/layer_2="Interactibles"
+3d_physics/layer_3="Held"
+3d_physics/layer_4="Player"
+
 [physics]
 
 common/enable_pause_aware_picking=true
