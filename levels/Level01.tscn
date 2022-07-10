@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://core/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Light/texture_02.png" type="Texture" id=2]
@@ -9,12 +9,62 @@
 [sub_resource type="SpatialMaterial" id=1]
 flags_world_triplanar = true
 albedo_texture = ExtResource( 2 )
+clearcoat_enabled = true
+clearcoat = 1.0
+clearcoat_gloss = 1.0
+anisotropy_enabled = true
+anisotropy = 1.0
 uv1_scale = Vector3( 0.5, 0.5, 0.5 )
 uv1_offset = Vector3( 10, 0, 0 )
 uv1_triplanar = true
 
+[sub_resource type="ProceduralSky" id=2]
+sky_top_color = Color( 0.647059, 0.917647, 0.945098, 1 )
+sky_curve = 0.32445
+ground_curve = 0.15455
+sun_latitude = 76.47
+
+[sub_resource type="Environment" id=3]
+background_mode = 2
+background_sky = SubResource( 2 )
+background_energy = 0.75
+ambient_light_energy = 0.8
+ambient_light_sky_contribution = 0.9
+tonemap_mode = 3
+ssao_enabled = true
+ssao_radius = 6.0
+ssao_intensity = 0.2
+ssao_radius2 = 0.5
+ssao_intensity2 = 0.5
+ssao_bias = 0.046
+ssao_color = Color( 0.027451, 0, 0.278431, 1 )
+ssao_quality = 2
+glow_enabled = true
+glow_strength = 0.59
+glow_bloom = 0.21
+
 [node name="Spatial" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.8, -1.74846e-07 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 21.119
+spot_attenuation = 1.8025
+spot_angle = 45.8
+spot_angle_attenuation = 1.03526
+
+[node name="SpotLight2" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.8, -11.8086 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 21.119
+spot_attenuation = 1.8025
+spot_angle = 45.8
+spot_angle_attenuation = 1.03526
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34957, 3.0512 )
@@ -93,13 +143,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95, 0.8, -14.425 )
 collision_layer = 27
 collision_mask = 11
 mass = 20.0
-gravity_scale = 1.0
 angular_damp = 0.0
 
 [node name="ButtonGroup" parent="." instance=ExtResource( 5 )]
-transform = Transform( 0.999999, 0.0011695, -0.00115684, -0.00117019, 0.999999, -0.000582554, 0.00115614, 0.000583931, 0.999999, -3.51043, 0.249727, 1.99507 )
+transform = Transform( 0.999999, 0.0011695, -0.00115684, -0.00117019, 0.999999, -0.000582554, 0.00115614, 0.000583931, 0.999999, -3.51073, -0.00718206, 1.99492 )
 relations/output = [ NodePath("../DoorStream") ]
 
 [node name="DoorStream" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -5.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5.5 )
 relations/input = [  ]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )

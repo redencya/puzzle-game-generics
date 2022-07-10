@@ -16,9 +16,7 @@ points = PoolVector3Array( 0.699863, 0.699863, 0.699863, 0.699863, 0.699863, -0.
 [node name="Cube" type="RigidBody"]
 collision_layer = 19
 collision_mask = 3
-gravity_scale = 5.0
-contacts_reported = 5
-contact_monitor = true
+linear_velocity = Vector3( 0, -30, 0 )
 angular_damp = 98.8
 script = ExtResource( 2 )
 
@@ -28,6 +26,3 @@ material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 3 )
-
-[connection signal="body_entered" from="." to="." method="_on_Cube_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_Cube_body_exited"]
