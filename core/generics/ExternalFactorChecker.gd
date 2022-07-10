@@ -14,6 +14,7 @@ func _on_ExternalFactorChecker_body_entered(body: Node) -> void:
 		body_reference.set_axis_lock(axis, true)
 
 func _on_ExternalFactorChecker_body_exited(body: Node) -> void:
+	if !body_reference: return
 	for axis in TOTAL_ANGULAR_LOCK:
 		body_reference.set_axis_lock(axis, false)
 	body_reference = null

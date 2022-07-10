@@ -62,12 +62,12 @@ angular_limit_z/enabled = false
 
 [node name="ButtonBaseGround" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, -1.02449e-09, 1.04774e-09, 1.03319e-09, 1, 5.23869e-10, -1.04774e-09, -5.23869e-10, 1, -4.67346e-11, -5.96048e-08, -2.33486e-11 )
-collision_layer = 2
-collision_mask = 2
+collision_mask = 14
 mode = 1
 
 [node name="ButtonPressGround" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, -2.09127e-10, 2.32831e-10, 2.1879e-10, 1, 1.16415e-10, -2.32831e-10, -1.16415e-10, 1, 0, 0, 0 )
+collision_mask = 14
 mass = 0.2
 axis_lock_linear_x = true
 axis_lock_linear_z = true
@@ -77,12 +77,16 @@ axis_lock_angular_z = true
 
 [node name="Receiver" type="Area" parent="ButtonPressGround"]
 transform = Transform( 1, -1.49066e-09, 1.5134e-09, 1.49834e-09, 1, 7.567e-10, -1.5134e-09, -7.567e-10, 1, 2.12154e-09, 0.331334, -1.01863e-10 )
+collision_layer = 64
+collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="ButtonPressGround/Receiver"]
 shape = SubResource( 12 )
 
 [node name="ButtonTick" type="RigidBody" parent="."]
 transform = Transform( 1, -4.42071e-10, 4.65661e-10, 4.5145e-10, 1, 2.32831e-10, -4.65661e-10, -2.32831e-10, 1, 2.50273e-09, 0.171015, -2.18279e-11 )
+collision_layer = 2
+collision_mask = 2
 mode = 1
 axis_lock_linear_x = true
 axis_lock_linear_y = true
@@ -103,14 +107,16 @@ shape = SubResource( 11 )
 
 [node name="Transmitter" type="Area" parent="ButtonTick"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.216665, 0 )
+collision_layer = 0
+collision_mask = 64
 
 [node name="CollisionShape" type="CollisionShape" parent="ButtonTick/Transmitter"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.208226, 0 )
 shape = SubResource( 12 )
 
 [node name="ExternalFactorChecker" type="Area" parent="."]
-collision_layer = 8
-collision_mask = 8
+collision_layer = 0
+collision_mask = 6
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="ExternalFactorChecker"]

@@ -20,17 +20,21 @@ func hold_object(input, object):
 		object.global_transform.origin = pivot.global_transform.origin
 	else:
 		object.set_mode(RigidBody.MODE_RIGID)
-		object.collision_mask = 3
+		current_body.collision_mask = 15
+		current_body.collision_layer = 2
 		
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
+		print(current_body)
 		if get_collider() && !hold_mode:
 			current_body = get_collider()
 			hold_mode = true
-			current_body.collision_mask = 0
+			current_body.collision_mask = 7
+			current_body.collision_layer = 4
 			current_body.set_mode(RigidBody.MODE_KINEMATIC)
 		elif hold_mode:
 			current_body.set_mode(RigidBody.MODE_RIGID)
-			current_body.collision_mask = 3
+			current_body.collision_mask = 15
+			current_body.collision_layer = 2
 			current_body = null
 			hold_mode = false
