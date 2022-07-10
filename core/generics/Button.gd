@@ -84,3 +84,5 @@ func _on_Transmitter_area_exited(area: Area) -> void:
 		for target in output:
 			connect("stream_input", get_node(target), "_input_stream_recieved", [], CONNECT_REFERENCE_COUNTED)
 			emit_signal("stream_input", false, name)
+
+

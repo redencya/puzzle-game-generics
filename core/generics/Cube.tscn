@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/Orange/texture_10.png" type="Texture" id=1]
+[ext_resource path="res://core/generics/Cube.gd" type="Script" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 1.4, 1.4, 1.4 )
@@ -13,10 +14,13 @@ uv1_triplanar = true
 points = PoolVector3Array( 0.699863, 0.699863, 0.699863, 0.699863, 0.699863, -0.7, -0.7, 0.699863, 0.699863, 0.699863, -0.7, 0.699863, 0.699863, -0.7, -0.7, -0.7, 0.699863, -0.7, -0.7, -0.7, 0.699863, -0.7, -0.7, -0.7 )
 
 [node name="Cube" type="RigidBody"]
-collision_layer = 3
+collision_layer = 19
 collision_mask = 3
 gravity_scale = 5.0
+contacts_reported = 5
+contact_monitor = true
 angular_damp = 98.8
+script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
@@ -24,3 +28,6 @@ material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 3 )
+
+[connection signal="body_entered" from="." to="." method="_on_Cube_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Cube_body_exited"]

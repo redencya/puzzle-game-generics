@@ -1,10 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://core/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/hud/crosshair_on.png" type="Texture" id=2]
 [ext_resource path="res://core/player/ObjectDetection.gd" type="Script" id=3]
 [ext_resource path="res://assets/hud/crosshair_off.png" type="Texture" id=4]
 [ext_resource path="res://core/player/Crosshair.gd" type="Script" id=5]
+[ext_resource path="res://core/player/Solidifer.gd" type="Script" id=6]
+
+[sub_resource type="CapsuleShape" id=4]
+radius = 0.501343
+height = 0.002
 
 [sub_resource type="CapsuleMesh" id=1]
 radius = 0.5
@@ -18,6 +23,8 @@ radius = 0.6
 height = 0.3
 
 [node name="Player" type="KinematicBody"]
+collision_layer = 19
+collision_mask = 3
 input_ray_pickable = false
 script = ExtResource( 1 )
 move_speed = 20
@@ -29,6 +36,16 @@ control_deceleration_air = 0.25
 gravity_falling = 20
 gravity_rising = 40
 gravity_jump_force = 10
+
+[node name="Solidifer" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.735033, 0 )
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Solidifer"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 5.96046e-08, 0 )
+shape = SubResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -68,7 +85,7 @@ size = 0.15
 [node name="RayCast" type="RayCast" parent="Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3 )
 enabled = true
-cast_to = Vector3( 0, 0, -1.2 )
+cast_to = Vector3( 0, 0, -2.5 )
 collision_mask = 8
 script = ExtResource( 3 )
 
@@ -100,4 +117,6 @@ axis_lock_angular_z = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.813105, 0 )
 shape = SubResource( 3 )
 
+[connection signal="body_entered" from="Solidifer" to="Solidifer" method="_on_Solidifer_body_entered"]
+[connection signal="body_exited" from="Solidifer" to="Solidifer" method="_on_Solidifer_body_exited"]
 [connection signal="highlight_object" from="Camera/RayCast" to="CanvasLayer/Crosshair" method="_on_RayCast_highlight_object"]

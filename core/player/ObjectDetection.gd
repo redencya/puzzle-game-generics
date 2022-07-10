@@ -27,8 +27,8 @@ func _input(event: InputEvent) -> void:
 		if get_collider() && !hold_mode:
 			current_body = get_collider()
 			hold_mode = true
-			current_body.set_mode(RigidBody.MODE_KINEMATIC)
 			current_body.collision_mask = 0
+			current_body.set_mode(RigidBody.MODE_KINEMATIC)
 		elif hold_mode:
 			current_body.set_mode(RigidBody.MODE_RIGID)
 			current_body.collision_mask = 3

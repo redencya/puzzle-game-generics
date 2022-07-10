@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://core/generics/Button.gd" type="Script" id=1]
+[ext_resource path="res://core/generics/ExternalFactorChecker.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=13]
 resource_name = "Presseed"
@@ -117,11 +118,11 @@ anims/RESET = SubResource( 14 )
 [node name="Generic6DOFJoint" type="Generic6DOFJoint" parent="."]
 nodes/node_a = NodePath("../Button")
 nodes/node_b = NodePath("../ButtonTick")
-collision/exclude_nodes = false
 linear_limit_x/enabled = false
 angular_limit_x/enabled = false
+linear_limit_y/restitution = 1.0
 linear_spring_y/enabled = true
-linear_spring_y/stiffness = 1.5
+linear_spring_y/stiffness = 0.001
 angular_limit_y/enabled = false
 linear_limit_z/enabled = false
 angular_limit_z/enabled = false
@@ -196,9 +197,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.208226, 0 )
 shape = SubResource( 12 )
 
 [node name="ExternalFactorChecker" type="Area" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="ExternalFactorChecker"]
 shape = SubResource( 3 )
 
 [connection signal="area_entered" from="ButtonTick/Transmitter" to="." method="_on_Transmitter_area_entered"]
 [connection signal="area_exited" from="ButtonTick/Transmitter" to="." method="_on_Transmitter_area_exited"]
+[connection signal="body_entered" from="ExternalFactorChecker" to="ExternalFactorChecker" method="_on_ExternalFactorChecker_body_entered"]
+[connection signal="body_exited" from="ExternalFactorChecker" to="ExternalFactorChecker" method="_on_ExternalFactorChecker_body_exited"]
