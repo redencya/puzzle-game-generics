@@ -21,7 +21,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(-event.relative.x)*0.3)
-		$Camera.rotation.x = clamp($Camera.rotation.x + (deg2rad(-event.relative.y)*0.3), deg2rad(-80), deg2rad(80))
+		$Camera.rotation.x = clamp($Camera.rotation.x + (deg2rad(-event.relative.y)*0.3), deg2rad(-89.9), deg2rad(89.9))
 
 # Creates a velocity vector with relative camera positioning.
 func construct_velocity(phi: float, dir: Vector2, speed: float, gforce: float) -> Vector3:
