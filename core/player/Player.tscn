@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://core/player/Player.gd" type="Script" id=1]
-[ext_resource path="res://assets/hud/base_crosshair.svg" type="Texture" id=2]
+[ext_resource path="res://assets/GeneralCursor.svg" type="Texture" id=2]
 [ext_resource path="res://core/player/ObjectDetection.gd" type="Script" id=3]
 [ext_resource path="res://core/player/Crosshair.gd" type="Script" id=5]
 [ext_resource path="res://core/player/Solidifer.gd" type="Script" id=6]
@@ -109,6 +109,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector3( 0, -90, 0 ), Vector3( 0, -90, -10 ), Vector3( 0, -90, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("CanvasLayer/ViewportContainer/Viewport/Camera/Gun/gun001:mesh:surface_1/material:emission_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 0.392292, 1.41421, 2.14355 ),
+"update": 0,
+"values": [ 2.0, 5.0, 2.0 ]
+}
 
 [sub_resource type="Animation" id=9]
 length = 0.001
@@ -135,6 +147,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, -90, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CanvasLayer/ViewportContainer/Viewport/Camera/Gun/gun001:mesh:surface_1/material:emission_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
 }
 
 [node name="Player" type="KinematicBody"]
@@ -206,14 +230,6 @@ transform = Transform( -3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 0.7
 [node name="gun001" parent="CanvasLayer/ViewportContainer/Viewport/Camera/Gun" index="0"]
 transform = Transform( 0.779128, 0, -8.88178e-16, 0, 0.380214, 0, -3.55271e-15, 0, 0.296264, 0, 0, 0 )
 layers = 3
-
-[node name="SpotLight2" type="OmniLight" parent="CanvasLayer/ViewportContainer/Viewport/Camera/Gun"]
-transform = Transform( -0.124508, 0, 1.42314, 0, 1.42857, 0, -1.42314, 0, -0.124508, -0.941101, 0.288273, 1.19209e-07 )
-layers = 3
-light_color = Color( 0.513726, 0.290196, 0, 1 )
-light_specular = 8.0
-omni_range = 10.0
-omni_attenuation = 2.73208
 
 [node name="Crosshair" type="CenterContainer" parent="CanvasLayer"]
 anchor_right = 1.0

@@ -17,6 +17,7 @@ func _on_ExternalFactorChecker_body_exited(body: Node) -> void:
 func set_total_angular_axis_lock(body, is_true):
 	for axis in TOTAL_ANGULAR_LOCK:
 		body.set_axis_lock(axis, is_true)
+	get_tree() Vector3.ZERO
 
 func validate_input(weight_type, body, entering) -> bool:
 	match weight_type:
