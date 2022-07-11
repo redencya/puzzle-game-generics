@@ -207,6 +207,14 @@ transform = Transform( -3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 0.7
 transform = Transform( 0.779128, 0, -8.88178e-16, 0, 0.380214, 0, -3.55271e-15, 0, 0.296264, 0, 0, 0 )
 layers = 3
 
+[node name="SpotLight2" type="OmniLight" parent="CanvasLayer/ViewportContainer/Viewport/Camera/Gun"]
+transform = Transform( -0.124508, 0, 1.42314, 0, 1.42857, 0, -1.42314, 0, -0.124508, -0.941101, 0.288273, 1.19209e-07 )
+layers = 3
+light_color = Color( 0.513726, 0.290196, 0, 1 )
+light_specular = 8.0
+omni_range = 10.0
+omni_attenuation = 2.73208
+
 [node name="Crosshair" type="CenterContainer" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0

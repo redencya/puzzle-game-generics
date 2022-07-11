@@ -18,6 +18,9 @@ var duration
 var input
 var output
 
+func render_immediate_geometry(outputs):
+	pass
+
 func _input_stream_received(i: bool, sourcename: String):
 	enabled = i
 

@@ -16,6 +16,9 @@ var gravity_falling = 20
 var gravity_rising = 40
 var gravity_jump_force = 10
 
+func _process(delta: float) -> void:
+	$CanvasLayer/ViewportContainer/Viewport/Camera.global_transform = $Camera.global_transform
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		$AnimationPlayer.play("GunMove")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/Cube_Mat.material" type="Material" id=1]
+[ext_resource path="res://assets/CubeSquare_Mat.material" type="Material" id=1]
 [ext_resource path="res://core/generics/Cube.gd" type="Script" id=2]
 [ext_resource path="res://core/generics/3DLabel.gd" type="Script" id=3]
 

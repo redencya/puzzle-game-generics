@@ -1,50 +1,31 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://core/player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/Light/texture_02.png" type="Texture" id=2]
-[ext_resource path="res://core/generics/Cube.tscn" type="PackedScene" id=3]
-[ext_resource path="res://core/generics/Door.tscn" type="PackedScene" id=4]
-[ext_resource path="res://core/generics/Button.tscn" type="PackedScene" id=5]
-[ext_resource path="res://GateStream.tscn" type="PackedScene" id=6]
-[ext_resource path="res://core/generics/SuspensionZone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://core/generics/Cube.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/kenney_prototype_textures/dark/texture_09.png" type="Texture" id=3]
+[ext_resource path="res://addons/kenney_prototype_textures/dark/texture_03.png" type="Texture" id=4]
+[ext_resource path="res://core/generics/Door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://core/generics/Button.tscn" type="PackedScene" id=6]
 
-[sub_resource type="SpatialMaterial" id=1]
-flags_world_triplanar = true
-albedo_texture = ExtResource( 2 )
-clearcoat_enabled = true
-clearcoat = 1.0
-clearcoat_gloss = 1.0
-anisotropy_enabled = true
-anisotropy = 1.0
-uv1_scale = Vector3( 0.5, 0.5, 0.5 )
-uv1_offset = Vector3( 10, 0, 0 )
-uv1_triplanar = true
-
-[sub_resource type="SpatialMaterial" id=4]
-resource_local_to_scene = true
-albedo_color = Color( 1, 0, 0, 1 )
-
-[sub_resource type="SpatialMaterial" id=5]
-resource_local_to_scene = true
-albedo_color = Color( 1, 0, 0, 1 )
-
-[sub_resource type="SpatialMaterial" id=6]
-resource_local_to_scene = true
-albedo_color = Color( 1, 0, 0, 1 )
-
-[sub_resource type="ProceduralSky" id=2]
-sky_top_color = Color( 0.0823529, 0.0705882, 0.152941, 1 )
-sky_horizon_color = Color( 0, 0.0705882, 0.12549, 1 )
-sky_curve = 0.32445
-ground_bottom_color = Color( 0, 0, 0, 1 )
-ground_horizon_color = Color( 0.117647, 0.117647, 0.117647, 1 )
-ground_curve = 0.15455
-sun_latitude = 76.47
+[sub_resource type="ProceduralSky" id=6]
+sky_top_color = Color( 0.654902, 0, 0.305882, 1 )
+sky_horizon_color = Color( 0.054902, 0, 0.0784314, 1 )
+sky_curve = 2.2596
+ground_bottom_color = Color( 0, 0.34902, 0.654902, 1 )
+ground_horizon_color = Color( 0.054902, 0, 0.0784314, 1 )
+ground_curve = 2.38856
+sun_color = Color( 0, 0, 0, 1 )
+sun_latitude = -35.0
+sun_angle_min = 8.55
+sun_angle_max = 32.12
+sun_curve = 0.0203063
 
 [sub_resource type="Environment" id=3]
-background_mode = 3
-background_sky = SubResource( 2 )
-ambient_light_color = Color( 1, 1, 1, 1 )
+background_mode = 2
+background_sky = SubResource( 6 )
+background_energy = 0.8
+ambient_light_color = Color( 0.890196, 0.501961, 1, 1 )
+ambient_light_energy = 0.3
 fog_enabled = true
 fog_color = Color( 0.454902, 0.482353, 0.509804, 1 )
 tonemap_mode = 2
@@ -63,180 +44,143 @@ ssao_bias = 0.046
 ssao_color = Color( 0.027451, 0, 0.278431, 1 )
 ssao_quality = 2
 glow_enabled = true
-glow_strength = 0.69
-glow_bloom = 0.06
-glow_blend_mode = 1
+glow_levels/1 = true
+glow_levels/4 = true
+glow_levels/5 = false
+glow_strength = 0.78
+glow_bloom = 0.16
 adjustment_enabled = true
 adjustment_contrast = 0.85
 adjustment_saturation = 0.9
 
+[sub_resource type="SpatialMaterial" id=7]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 4 )
+clearcoat_enabled = true
+clearcoat = 0.43
+clearcoat_gloss = 0.66
+anisotropy_enabled = true
+anisotropy = 0.0
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 3 )
+clearcoat_enabled = true
+clearcoat = 0.43
+clearcoat_gloss = 0.66
+anisotropy_enabled = true
+anisotropy = 0.0
+uv1_triplanar = true
+
+[sub_resource type="PrismMesh" id=8]
+left_to_right = 0.0
+size = Vector3( 6, 2, 5 )
+
 [node name="Spatial" type="Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34957, 3.0512 )
-move_speed = 6.5
-move_run_speed = 1.5
-control_acceleration = 0.15
-control_deceleration = 0.17
-control_deceleration_air = 0.2
-gravity_falling = 50.0
-gravity_rising = 60.0
-gravity_jump_force = 12.0
-
-[node name="Pedestal" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.495, -3.5 )
-use_collision = true
-collision_layer = 17
-collision_mask = 0
-width = 3.0
-height = 1.0
-depth = 3.0
-material = SubResource( 1 )
-
-[node name="Pedestal3" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.625, 0.495, -3.5 )
-use_collision = true
-collision_layer = 17
-collision_mask = 0
-width = 3.0
-height = 1.0
-depth = 3.0
-material = SubResource( 1 )
-
-[node name="Pedestal2" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.495, -3.5 )
-use_collision = true
-collision_layer = 17
-collision_mask = 0
-width = 3.0
-height = 1.0
-depth = 3.0
-material = SubResource( 1 )
-
-[node name="Group" type="CSGCombiner" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-material_override = SubResource( 1 )
-lightmap_scale = 3
-use_collision = true
-collision_layer = 17
-collision_mask = 0
 
-[node name="Room" type="CSGBox" parent="Group"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-invert_faces = true
-width = 10.0
-height = 8.0
-depth = 10.0
+[node name="DoorStream" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.75, 0.5, -10.5 )
+relations/input = [ NodePath("../ButtonGroup") ]
 
-[node name="Room2" type="CSGBox" parent="Group"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -11 )
-invert_faces = true
-width = 10.0
-height = 8.0
-depth = 10.0
-
-[node name="Room3" type="CSGBox" parent="Group"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 4, -5.5 )
-invert_faces = true
-width = 5.0
-height = 4.0
-depth = 21.0
-
-[node name="Connector" type="CSGBox" parent="Group"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.588287, -5.5 )
-invert_faces = true
-width = 1.76752
-height = 2.81698
-depth = 1.0
-
-[node name="SuspensionZone2" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0509943, 2.05, -11 )
-suspension/type = 1
-suspension/dimensions = Vector3( 5, 2, 5 )
-
-[node name="ButtonGroup" parent="." instance=ExtResource( 5 )]
-transform = Transform( 0.999999, 0.0011695, -0.00115684, -0.00117019, 0.999999, -0.000582554, 0.00115614, 0.000583931, 0.999999, -3.51019, -0.0386041, 1.4949 )
+[node name="ButtonGroup" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.999999, 0.0011695, -0.00115684, -0.00117019, 0.999999, -0.000582554, 0.00115614, 0.000583931, 0.999999, 5.25404, -1.25703, -3.99104 )
 functionality/input_type = 1
 functionality/weight_type = 1
-functionality/cube_type = 1
+functionality/cube_type = 0
 general/type = 0
-relations/output = [ NodePath("../StreamInterface") ]
-
-[node name="ButtonGroup2" parent="." instance=ExtResource( 5 )]
-transform = Transform( 0.999999, 0.0011695, -0.00115684, -0.00117019, 0.999999, -0.000582554, 0.00115614, 0.000583931, 0.999999, -3.492, -0.029443, -14.2301 )
-functionality/input_type = 1
-functionality/weight_type = 0
-general/type = 0
-relations/output = [ NodePath("../StreamInterface") ]
-
-[node name="StreamInterface" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-logic/operator_type = 1
-relations/input = [ NodePath("../ButtonGroup"), NodePath("../ButtonGroup2") ]
-relations/output = [ NodePath("../Door") ]
-
-[node name="CSGCombiner" parent="StreamInterface" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000226498, 7.74036, 0.0048852 )
-visible = false
-collision_layer = 0
-collision_mask = 0
-
-[node name="InputVisualA" parent="StreamInterface" index="2"]
-visible = false
-material = SubResource( 4 )
-
-[node name="InputVisualB" parent="StreamInterface" index="3"]
-visible = false
-material = SubResource( 5 )
-
-[node name="OutcomeVisual" parent="StreamInterface" index="4"]
-visible = false
-material = SubResource( 6 )
-
-[node name="Door" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, -5.5 )
-relations/input = [  ]
-
-[node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.75, 7.75, 2.25 )
-layers = 3
-light_color = Color( 0.635294, 0.898039, 1, 1 )
-light_energy = 2.0
-light_specular = 2.0
-shadow_enabled = true
-shadow_color = Color( 0.823529, 0.819608, 0.819608, 1 )
-omni_range = 43.156
-omni_attenuation = 0.812253
-
-[node name="OmniLight2" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.75, -2.975 )
-visible = false
-layers = 3
-shadow_enabled = true
-omni_range = 12.948
-omni_attenuation = 1.1487
-omni_shadow_mode = 0
-
-[node name="OmniLight4" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.25, 7.75, -14.225 )
-layers = 3
-light_color = Color( 0.635294, 0.898039, 1, 1 )
-light_energy = 2.0
-light_specular = 2.0
-shadow_enabled = true
-shadow_color = Color( 0.823529, 0.819608, 0.819608, 1 )
-omni_range = 43.156
-omni_attenuation = 0.812253
+relations/output = [ NodePath("../DoorStream") ]
 
 [node name="Sky" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
 
-[node name="Cube1" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.75, 1.75, -3.25 )
+[node name="Cube" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25, -0.25, 0.75 )
 
-[node name="Cube2" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.75, 6.49939, -14.4124 )
+[node name="Cube2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, -0.25, 3.25 )
 general/type = 1
 
-[editable path="StreamInterface"]
+[node name="Cube3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, -0.25, -4.75 )
+general/type = 2
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75 )
+move_speed = 6.0
+move_run_speed = 1.8
+control_acceleration_air = 0.35
+control_deceleration_air = 0.0258816
+gravity_falling = 30.0
+gravity_rising = 55.0
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, 0 )
+layers = 3
+light_color = Color( 1, 0, 0, 1 )
+light_energy = 5.0
+shadow_enabled = true
+omni_range = 20.0
+omni_attenuation = 1.7411
+
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.075, 2, 0 )
+layers = 3
+light_color = Color( 0, 0.462745, 1, 1 )
+light_energy = 5.0
+shadow_enabled = true
+omni_range = 20.0
+omni_attenuation = 1.7411
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+use_collision = true
+collision_layer = 17
+collision_mask = 0
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0 )
+width = 17.0
+height = 0.5
+depth = 14.0
+material = SubResource( 7 )
+
+[node name="CSGBox4" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -14 )
+width = 17.0
+height = 2.5
+depth = 14.0
+material = SubResource( 7 )
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.75, -6.75 )
+width = 1.0
+height = 7.0
+depth = 29.5
+material = SubResource( 4 )
+
+[node name="CSGBox5" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0749997, 1.75, -10.25 )
+width = 1.0
+height = 7.0
+depth = 16.5
+material = SubResource( 4 )
+
+[node name="CSGBox6" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.73656, 1.89437, -10.25 )
+operation = 2
+width = 1.5
+height = 2.76786
+depth = 1.69665
+material = SubResource( 4 )
+
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.12118, 1.75, -6.75 )
+width = 1.0
+height = 7.0
+depth = 29.5
+material = SubResource( 4 )
+
+[node name="CSGMesh" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.05, -0.5, -3.975 )
+mesh = SubResource( 8 )

@@ -2,7 +2,7 @@ tool
 extends RigidBody
 class_name Cube
 
-const RED = preload("res://assets/Cube_Mat.material")
+const RED = preload("res://assets/CubeSquare_Mat.material")
 const YELLOW = preload("res://assets/CubeCircle_Mat.material")
 const GREEN = preload("res://assets/CubeTriangle_Mat.material")
 

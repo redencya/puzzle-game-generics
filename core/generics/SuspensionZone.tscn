@@ -48,7 +48,6 @@ shader_param/uv2_scale = Vector3( 1, 1, 1 )
 shader_param/uv2_offset = Vector3( 0, 0, 0 )
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 5, 2, 5 )
 
 [node name="SuspensionZone" type="Area"]
 collision_layer = 0
