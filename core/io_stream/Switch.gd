@@ -18,8 +18,8 @@ var duration
 var input
 var output
 
-func _input_stream_received(input: bool, sourcename: String):
-	enabled = input
+func _input_stream_received(i: bool, sourcename: String):
+	enabled = i
 
 func _set(property: String, value) -> bool:
 	var return_value := true

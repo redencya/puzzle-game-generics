@@ -2,6 +2,8 @@ tool
 extends KinematicBody
 class_name Player
 
+var gameplay_restriction_mode: int
+
 var move_speed = 20
 var move_run_speed = 1.25
 
@@ -15,6 +17,9 @@ var gravity_rising = 40
 var gravity_jump_force = 10
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("shoot"):
+		$AnimationPlayer.play("GunMove")
+	
 	if event.is_action_pressed("fullscreen"):
 		OS.set_window_fullscreen(!OS.is_window_fullscreen())
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED * int(OS.is_window_fullscreen()))

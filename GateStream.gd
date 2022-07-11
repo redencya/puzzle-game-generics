@@ -45,18 +45,19 @@ func _input_stream_recieved(input: bool, sourcename: String):
 			else:
 				$AnimationPlayer.play_backwards("InputB")
 				
-	yield($AnimationPlayer, "animation_finished")
-	
-	outcome = _get_outcome_value(input_a, input_b, operator_type)
-
-	if outcome:
-		$AnimationPlayer.play("Outcome")
-	else:
-		$AnimationPlayer.play_backwards("Outcome")
-		
+	var new_outcome = _get_outcome_value(input_a, input_b, operator_type)
 	for target in output:
 		connect("stream_input", get_node(target), "_input_stream_recieved", [], CONNECT_REFERENCE_COUNTED)
-		emit_signal("stream_input", outcome, name)
+		emit_signal("stream_input", new_outcome, name)
+	
+	yield($AnimationPlayer, "animation_finished")
+	
+	if new_outcome != outcome:
+		outcome = new_outcome
+		if outcome:
+			$AnimationPlayer.play("Outcome")
+		else:
+			$AnimationPlayer.play_backwards("Outcome")
 
 func _set(property: String, value) -> bool:
 	var return_value = true

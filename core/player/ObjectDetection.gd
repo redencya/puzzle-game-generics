@@ -8,8 +8,7 @@ signal highlight_object(value)
 var hold_mode: bool = false
 
 func _process(delta: float) -> void:
-	get_collider()
-	emit_signal("highlight_object", get_collider() != null)
+	emit_signal("highlight_object", get_collider())
 
 func _physics_process(delta: float) -> void:
 	hold_object(hold_mode, current_body)
@@ -26,7 +25,7 @@ func hold_object(input, object):
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		print(current_body)
-		if get_collider() && !hold_mode:
+		if get_collider() is RigidBody && !hold_mode:
 			current_body = get_collider()
 			hold_mode = true
 			current_body.collision_mask = 7
