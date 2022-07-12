@@ -15,4 +15,3 @@ func set_highlight(value : bool) -> void:
 
 func _on_RayCast_highlight_object(value):
 	set_highlight(value is RigidBody)
-	print(value is RigidBody)

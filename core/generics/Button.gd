@@ -124,17 +124,13 @@ func _on_ExternalFactorChecker_body_exited(body: Node) -> void:
 	emit_signal("stream_input", false, name)
 	$AnimationPlayer.play_backwards("Press")
 
-func set_total_angular_axis_lock(body, is_true):
-	for axis in TOTAL_ANGULAR_LOCK:
-		body.set_axis_lock(axis, is_true)
-
 func validate_input(weight, body, entering) -> bool:
 	match weight:
 		0:
 			return true
 		1:
 			if !(body is Cube): return false
-			set_total_angular_axis_lock(body, entering)
+			#set_total_angular_axis_lock(body, entering)
 			return body.type == cube_type
 		2:
 			return body is Player

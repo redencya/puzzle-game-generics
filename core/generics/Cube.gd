@@ -2,11 +2,21 @@ tool
 extends RigidBody
 class_name Cube
 
+const TOTAL_ANGULAR_LOCK = [
+	PhysicsServer.BODY_AXIS_ANGULAR_X,
+	PhysicsServer.BODY_AXIS_ANGULAR_Y,
+	PhysicsServer.BODY_AXIS_ANGULAR_Z
+]
+
 const RED = preload("res://assets/CubeSquare_Mat.material")
 const YELLOW = preload("res://assets/CubeCircle_Mat.material")
 const GREEN = preload("res://assets/CubeTriangle_Mat.material")
 
 var type
+
+func set_total_angular_axis_lock(is_true):
+	for axis in TOTAL_ANGULAR_LOCK:
+		set_axis_lock(axis, is_true)
 
 func _ready() -> void:
 	var text_dict = {

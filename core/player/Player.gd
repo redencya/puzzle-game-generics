@@ -12,9 +12,10 @@ var control_deceleration = 0.25
 var control_acceleration_air = 0.25
 var control_deceleration_air = 0.25
 
-var gravity_falling = 20
-var gravity_rising = 40
-var gravity_jump_force = 10
+var physics_falling = 20
+var physics_rising = 40
+var physics_jump_force = 10
+var physics_collision_push = 50
 
 func _process(delta: float) -> void:
 	$CanvasLayer/ViewportContainer/Viewport/Camera.global_transform = $Camera.global_transform
@@ -43,7 +44,7 @@ func calculate_move_speed(idle: bool, speed_control: Array, limit: float):
 	return clamp(previous_speed_reference + (speed_control[int(idle)]), 0, limit)
 
 func calculate_gravity(delta: float, previous_y: float, gravity_factor: float, is_jumping: bool):
-	if is_jumping: return gravity_jump_force
+	if is_jumping: return physics_jump_force
 	return previous_y - (gravity_factor * delta)
 
 var previous_speed = move_speed
@@ -62,8 +63,8 @@ func choose_speed_control(grounded = is_on_floor()) -> Array:
 	return [control_acceleration_air, -control_deceleration_air]
 
 func choose_gravity_factor(previous_y: float) -> float:
-	if previous_y > 0: return gravity_falling
-	return gravity_rising
+	if previous_y > 0: return physics_falling
+	return physics_rising
 
 var velocity: Vector3
 var input_vector = Vector2.UP
@@ -95,8 +96,12 @@ func _physics_process(delta: float) -> void:
 			)
 	)
 	var snap = Vector3.ZERO if Input.is_action_just_pressed("jump") && is_on_floor() else -get_floor_normal() * 4
-	velocity = move_and_slide_with_snap(velocity, Vector3.ZERO, Vector3.UP)
+	velocity = move_and_slide_with_snap(velocity, snap, Vector3.UP, true, 4, PI/4, false)
 	
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.is_in_group("bodies"):
+			collision.collider.apply_central_impulse(-collision.normal * physics_collision_push * velocity.length())
 
 func _get_property_list() -> Array:
 	var properties := []
@@ -162,24 +167,29 @@ func _get_property_list() -> Array:
 
 
 	properties.append({
-		name = "Gravity",
+		name = "Physics",
 		type = TYPE_NIL,
-		hint_string = "gravity_",
+		hint_string = "physics_",
 		usage = PROPERTY_USAGE_GROUP | PROPERTY_USAGE_SCRIPT_VARIABLE
 	})
 	
 	properties.append({
-		name = "gravity_falling",
+		name = "physics_falling",
 		type = TYPE_REAL
 	})
 	
 	properties.append({
-		name = "gravity_rising",
+		name = "physics_rising",
 		type = TYPE_REAL
 	})
 	
 	properties.append({
-		name = "gravity_jump_force",
+		name = "physics_jump_force",
+		type = TYPE_REAL
+	})
+	
+	properties.append({
+		name = "physics_collision_push",
 		type = TYPE_REAL
 	})
 	

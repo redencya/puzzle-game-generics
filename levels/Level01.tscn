@@ -132,12 +132,15 @@ general/type = 2
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75 )
-move_speed = 6.0
-move_run_speed = 1.8
-control_acceleration_air = 0.35
-control_deceleration_air = 0.0258816
-gravity_falling = 30.0
-gravity_rising = 55.0
+move_speed = 8.0
+move_run_speed = 1.6
+control_acceleration = 0.129408
+control_deceleration = 0.170755
+control_acceleration_air = 0.287175
+control_deceleration_air = 0.0824694
+physics_falling = 30.0
+physics_rising = 55.0
+physics_collision_push = 0.5
 
 [node name="OmniLight2" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.825, 3.5, -9.5 )
@@ -164,7 +167,7 @@ omni_attenuation = 1.48416
 
 [node name="CSGCombiner" type="CSGCombiner" parent="."]
 use_collision = true
-collision_layer = 17
+collision_layer = 53
 collision_mask = 0
 
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner"]

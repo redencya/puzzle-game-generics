@@ -1,15 +1,13 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://core/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/GeneralCursor.svg" type="Texture" id=2]
 [ext_resource path="res://core/player/ObjectDetection.gd" type="Script" id=3]
 [ext_resource path="res://core/player/Crosshair.gd" type="Script" id=5]
-[ext_resource path="res://core/player/Solidifer.gd" type="Script" id=6]
 [ext_resource path="res://assets/Gun.glb" type="PackedScene" id=7]
 
-[sub_resource type="CapsuleShape" id=4]
-radius = 0.501343
-height = 0.002
+[sub_resource type="SphereShape" id=14]
+radius = 0.0452232
 
 [sub_resource type="CanvasItemMaterial" id=13]
 blend_mode = 1
@@ -172,9 +170,10 @@ control_acceleration = 0.25
 control_deceleration = 0.25
 control_acceleration_air = 0.25
 control_deceleration_air = 0.25
-gravity_falling = 20
-gravity_rising = 40
-gravity_jump_force = 10
+physics_falling = 20
+physics_rising = 40
+physics_jump_force = 10
+physics_collision_push = 50
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.675726, -0.340189 )
@@ -189,18 +188,19 @@ cast_to = Vector3( 0, 0, -1.8 )
 collision_mask = 18
 script = ExtResource( 3 )
 
-[node name="Position3D" type="Position3D" parent="Camera/RayCast"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.90253 )
+[node name="PinJoint" type="PinJoint" parent="Camera/RayCast"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00199008, -1.79517 )
+nodes/node_a = NodePath("../RigidBody")
+params/bias = 0.9
 
-[node name="Solidifer" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.735033, 0 )
+[node name="RigidBody" type="RigidBody" parent="Camera/RayCast"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.00154167, 0.00307202, -2.60355 )
 collision_layer = 0
-collision_mask = 2
-script = ExtResource( 6 )
+collision_mask = 0
+mode = 1
 
-[node name="CollisionShape" type="CollisionShape" parent="Solidifer"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 5.96046e-08, 0 )
-shape = SubResource( 4 )
+[node name="CollisionShape" type="CollisionShape" parent="Camera/RayCast/RigidBody"]
+shape = SubResource( 14 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
@@ -284,7 +284,5 @@ anims/GunMove = SubResource( 8 )
 anims/RESET = SubResource( 9 )
 
 [connection signal="highlight_object" from="Camera/RayCast" to="CanvasLayer/Crosshair" method="_on_RayCast_highlight_object"]
-[connection signal="body_entered" from="Solidifer" to="Solidifer" method="_on_Solidifer_body_entered"]
-[connection signal="body_exited" from="Solidifer" to="Solidifer" method="_on_Solidifer_body_exited"]
 
 [editable path="CanvasLayer/ViewportContainer/Viewport/Camera/Gun"]

@@ -1,8 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/CubeSquare_Mat.material" type="Material" id=1]
 [ext_resource path="res://core/generics/Cube.gd" type="Script" id=2]
 [ext_resource path="res://core/generics/3DLabel.gd" type="Script" id=3]
+
+[sub_resource type="PhysicsMaterial" id=5]
+friction = 0.85
+bounce = 0.2
+absorbent = true
 
 [sub_resource type="ArrayMesh" id=1]
 resource_local_to_scene = true
@@ -28,13 +33,14 @@ extents = Vector3( 0.78, 0.78, 0.78 )
 flags = 64
 viewport_path = NodePath("Label3D/TextViewport")
 
-[node name="Cube" type="RigidBody"]
+[node name="Cube" type="RigidBody" groups=["bodies"]]
 collision_layer = 2
 collision_mask = 31
-mass = 15.0
-gravity_scale = 10.0
+mass = 100.0
+physics_material_override = SubResource( 5 )
 contacts_reported = 2
 contact_monitor = true
+angular_damp = 1.5
 script = ExtResource( 2 )
 general/type = 0
 
