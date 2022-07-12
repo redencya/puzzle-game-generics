@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://core/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://core/generics/Cube.tscn" type="PackedScene" id=2]
@@ -95,6 +95,19 @@ uv1_triplanar = true
 left_to_right = 0.0
 size = Vector3( 6, 2, 5 )
 
+[sub_resource type="CylinderShape" id=12]
+height = 0.2
+
+[sub_resource type="CylinderMesh" id=13]
+height = 0.2
+radial_segments = 16
+
+[sub_resource type="BoxShape" id=14]
+extents = Vector3( 4, 0.1, 1 )
+
+[sub_resource type="CubeMesh" id=15]
+size = Vector3( 8, 0.2, 2 )
+
 [node name="Spatial" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
@@ -178,7 +191,7 @@ depth = 14.0
 material = SubResource( 7 )
 
 [node name="CSGBox4" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -14 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00115728, -0.754207, -13.9419 )
 width = 17.0
 height = 2.5
 depth = 14.0
@@ -233,5 +246,32 @@ light_specular = 0.2
 shadow_enabled = true
 shadow_color = Color( 0, 0.0588235, 0.188235, 1 )
 directional_shadow_blend_splits = true
+
+[node name="HingeJoint" type="HingeJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.63928, 0.532837, -16.0135 )
+nodes/node_a = NodePath("../RigidBody")
+nodes/node_b = NodePath("../StaticBody")
+motor/enable = true
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63928, 0.571387, -16.0135 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 12 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+mesh = SubResource( 13 )
+material/0 = null
+
+[node name="RigidBody" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63928, 0.773012, -16.0135 )
+mass = 10.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
+shape = SubResource( 14 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody"]
+mesh = SubResource( 15 )
+material/0 = null
 
 [editable path="Cube"]
