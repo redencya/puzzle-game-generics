@@ -15,3 +15,7 @@ func _physics_process(delta):
 
 func _on_RigidBody_body_entered(body: Node) -> void:
 	emit_signal("hit", transform.origin)
+	queue_free()
+	
+	if body is Cube:
+		PowerManager.power_object(body)

@@ -15,8 +15,9 @@ func _process(delta: float) -> void:
 	print(pivot.get_node_b())
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
+	if event.is_action_pressed("pickup"):
 		if get_collider() is Cube && !hold_mode:
+			$Pickup.play()
 			current_body = get_collider()
 			hold_mode = true
 			current_body.collision_mask = 7
@@ -32,3 +33,4 @@ func _input(event: InputEvent) -> void:
 			current_body.set_total_angular_axis_lock(false)
 			current_body = null
 			hold_mode = false
+			$Drop.play()

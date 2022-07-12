@@ -12,6 +12,7 @@ var input_type
 var weight_type
 var cube_type
 var click_type
+var powered
 
 var accent_color
 
@@ -48,6 +49,8 @@ func _set(property: String, value) -> bool:
 			click_type = value
 		"functionality/cube_type":
 			cube_type = value
+		"functionality/powered":
+			powered = value
 		"cosmetic/accent_color":
 			accent_color = value
 		_:
@@ -64,6 +67,8 @@ func _get(property: String):
 			return click_type
 		"functionality/cube_type":
 			return cube_type
+		"functionality/powered":
+			return powered
 		"cosmetic/accent_color":
 			return accent_color
 
@@ -95,6 +100,11 @@ func _get_property_list() -> Array:
 				type = TYPE_INT,
 				hint = PROPERTY_HINT_ENUM,
 				hint_string = "Square,Triangle,Circle"
+			})
+		
+			properties.append({
+				name = "functionality/powered",
+				type = TYPE_BOOL
 			})
 		
 	else:
@@ -130,8 +140,12 @@ func validate_input(weight, body, entering) -> bool:
 			return true
 		1:
 			if !(body is Cube): return false
-			#set_total_angular_axis_lock(body, entering)
-			return body.type == cube_type
+			return (body.type == cube_type) && has_power(body.active)
 		2:
 			return body is Player
 	return false
+
+func has_power(active):
+	if powered:
+		return powered && active
+	return true

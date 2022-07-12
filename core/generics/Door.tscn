@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://DoorStream.gd" type="Script" id=1]
 [ext_resource path="res://core/generics/DoorPanel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://core/generics/DoorFrame.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/open.ogg" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=4]
 resource_name = "Open"
-length = 0.6
+length = 5.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("Door:translation")
 tracks/0/interp = 1
@@ -14,8 +15,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 3.6 ),
+"transitions": PoolRealArray( 3.6, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( 1, 0, 0 ) ]
 }
@@ -26,10 +27,24 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 3.6 ),
+"transitions": PoolRealArray( 3.605, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0.1 ), Vector3( -1, 0, 0.1 ) ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AudioStreamPlayer3D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.97,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=5]
@@ -67,6 +82,12 @@ general/type = 1
 input/stream_mode = null
 input/duration = null
 relations/input = null
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4005, 0 )
+stream = ExtResource( 4 )
+unit_db = 4.0
+unit_size = 4.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Open = SubResource( 4 )

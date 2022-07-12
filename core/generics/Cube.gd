@@ -13,6 +13,7 @@ const YELLOW = preload("res://assets/CubeCircle_Mat.material")
 const GREEN = preload("res://assets/CubeTriangle_Mat.material")
 
 var type
+export (bool) var active
 
 func set_total_angular_axis_lock(is_true):
 	for axis in TOTAL_ANGULAR_LOCK:
@@ -28,6 +29,7 @@ func _ready() -> void:
 	$Mesh.mesh.surface_set_material(0, get_material(type))
 
 func _process(delta: float) -> void:
+	$Mesh.mesh.surface_get_material(0).set_emission_energy(5 * int(active))
 	if Engine.is_editor_hint():
 		var text_dict = {
 			0 : "Square",
