@@ -3,6 +3,7 @@ extends KinematicBody
 class_name Player
 
 var gameplay_restriction_mode: int
+var gameplay_bullet
 
 var move_speed = 20
 var move_run_speed = 1.25
@@ -21,7 +22,11 @@ func _process(delta: float) -> void:
 	$CanvasLayer/ViewportContainer/Viewport/Camera.global_transform = $Camera.global_transform
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
+	if event.is_action_pressed("shoot") && !$AnimationPlayer.is_playing():
+		var b = gameplay_bullet.instance()
+		owner.add_child(b)
+		b.global_transform.origin = $Camera/Muzzle.global_transform.origin
+		b.velocity = $Camera/Muzzle.global_transform.origin.direction_to($Camera/Muzzle2.global_transform.origin) * b.muzzle_velocity
 		$AnimationPlayer.play("GunMove")
 	
 	if event.is_action_pressed("fullscreen"):
@@ -109,10 +114,16 @@ func _get_property_list() -> Array:
 	properties.append({
 		name = "Gameplay",
 		type = TYPE_NIL,
-		hint_string = "game_",
+		hint_string = "gameplay_",
 		usage = PROPERTY_USAGE_GROUP | PROPERTY_USAGE_SCRIPT_VARIABLE
 	})
 
+	properties.append({
+		name = "gameplay_bullet",
+		type = TYPE_OBJECT,
+		hint = PROPERTY_HINT_RESOURCE_TYPE,
+		hint_string = "PackedScene"
+	})
 
 	properties.append({
 		name = "Movement",

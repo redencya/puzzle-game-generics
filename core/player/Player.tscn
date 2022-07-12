@@ -164,6 +164,7 @@ collision_layer = 8
 collision_mask = 19
 input_ray_pickable = false
 script = ExtResource( 1 )
+gameplay_bullet = null
 move_speed = 20
 move_run_speed = 1.25
 control_acceleration = 0.25
@@ -180,6 +181,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.675726, -0.340189 )
 current = true
 fov = 90.0
 size = 0.15
+
+[node name="Muzzle" type="Spatial" parent="Camera"]
+transform = Transform( -3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 0.514227, -0.436295, -1.30596 )
+
+[node name="Muzzle2" type="Spatial" parent="Camera"]
+transform = Transform( -3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 0.514227, -0.436295, -1.65464 )
 
 [node name="RayCast" type="RayCast" parent="Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3 )
@@ -228,7 +235,7 @@ size = 0.15
 transform = Transform( -3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 0.707, -0.699, -0.537 )
 
 [node name="gun001" parent="CanvasLayer/ViewportContainer/Viewport/Camera/Gun" index="0"]
-transform = Transform( 0.779128, 0, -8.88178e-16, 0, 0.380214, 0, -3.55271e-15, 0, 0.296264, 0, 0, 0 )
+transform = Transform( 0.779128, 0, -8.88178e-16, 0, 0.380214, 0, 0, 0, 0.296264, 0, 0, 0 )
 layers = 3
 
 [node name="Crosshair" type="CenterContainer" parent="CanvasLayer"]

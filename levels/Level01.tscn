@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://core/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://core/generics/Cube.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://core/generics/Door.tscn" type="PackedScene" id=5]
 [ext_resource path="res://core/generics/Button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/CubeSquare_Mat.material" type="Material" id=7]
+[ext_resource path="res://core/player/Bullet.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ProceduralSky" id=11]
 sky_top_color = Color( 0.101961, 0, 0.290196, 1 )
@@ -145,15 +146,15 @@ general/type = 2
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75 )
+gameplay_bullet = ExtResource( 8 )
 move_speed = 8.0
-move_run_speed = 1.6
 control_acceleration = 0.129408
-control_deceleration = 0.170755
-control_acceleration_air = 0.287175
-control_deceleration_air = 0.0824694
-physics_falling = 30.0
-physics_rising = 55.0
-physics_collision_push = 0.5
+control_deceleration = 0.277392
+control_acceleration_air = 0.466517
+control_deceleration_air = 0.0563282
+physics_falling = 39.0
+physics_rising = 50.0
+physics_collision_push = 1.0
 
 [node name="OmniLight2" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.825, 3.5, -9.5 )
