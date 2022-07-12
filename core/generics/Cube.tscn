@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/CubeSquare_Mat.material" type="Material" id=1]
 [ext_resource path="res://core/generics/Cube.gd" type="Script" id=2]
 [ext_resource path="res://core/generics/3DLabel.gd" type="Script" id=3]
+[ext_resource path="res://assets/ReadexPro.tres" type="DynamicFont" id=4]
 
 [sub_resource type="PhysicsMaterial" id=5]
 friction = 0.85
@@ -70,5 +71,6 @@ margin_right = 43.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 60, 0 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
 text = "Square"
 align = 1

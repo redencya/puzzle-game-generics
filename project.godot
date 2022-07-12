@@ -153,3 +153,4 @@ quality/shadows/filter_mode=2
 quality/shading/use_physical_light_attenuation=true
 quality/filters/use_nearest_mipmap_filter=true
 quality/filters/msaa=3
+environment/default_environment="res://default_env.tres"

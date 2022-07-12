@@ -87,7 +87,7 @@ axis_lock_angular_y = true
 axis_lock_angular_z = true
 
 [node name="ExternalFactorChecker" type="Area" parent="."]
-transform = Transform( 1, -7.91545e-10, 8.14907e-10, 8.00526e-10, 1, 4.07454e-10, -8.14907e-10, -4.07454e-10, 1, 7.79877e-10, 0.0550527, -7.27596e-12 )
+transform = Transform( 1, -9.08017e-10, 9.31323e-10, 9.16828e-10, 1, 4.65661e-10, -9.31323e-10, -4.65661e-10, 1, 7.72623e-10, 0.0550527, -7.27596e-12 )
 collision_layer = 0
 collision_mask = 14
 
