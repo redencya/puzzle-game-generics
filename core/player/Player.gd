@@ -18,6 +18,9 @@ var physics_rising = 40
 var physics_jump_force = 10
 var physics_collision_push = 50
 
+onready var crosshair_animate = $CanvasLayer/Crosshair/AnimationPlayer
+onready var grabber = $Camera/RayCast
+
 func _process(delta: float) -> void:
 	$CanvasLayer/ViewportContainer/Viewport/Camera.global_transform = $Camera.global_transform
 

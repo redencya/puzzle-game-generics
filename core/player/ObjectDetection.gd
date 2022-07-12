@@ -12,7 +12,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	emit_signal("highlight_object", get_collider())
-	print(pivot.get_node_b())
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pickup"):

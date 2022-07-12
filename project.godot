@@ -63,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="3DGame"
-run/main_scene="res://levels/Level01.tscn"
+run/main_scene="res://levels/LevelTest.tscn"
 config/icon="res://icon.png"
 
 [autoload]

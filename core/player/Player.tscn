@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://core/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/GeneralCursor.svg" type="Texture" id=2]
@@ -7,9 +7,20 @@
 [ext_resource path="res://core/player/Crosshair.gd" type="Script" id=5]
 [ext_resource path="res://assets/panel2rev.ogg" type="AudioStream" id=6]
 [ext_resource path="res://assets/Gun.glb" type="PackedScene" id=7]
+[ext_resource path="res://core/player/LightEffect.gd" type="Script" id=8]
+[ext_resource path="res://assets/READEXPRO-MEDIUM.TTF" type="DynamicFontData" id=9]
 
 [sub_resource type="SphereShape" id=14]
 radius = 0.0452232
+
+[sub_resource type="StyleBoxFlat" id=16]
+content_margin_left = 35.0
+content_margin_right = 35.0
+bg_color = Color( 0, 0, 0, 0.352941 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 32
+font_data = ExtResource( 9 )
 
 [sub_resource type="CanvasItemMaterial" id=13]
 blend_mode = 1
@@ -68,6 +79,58 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 0.643137, 0.643137, 0.643137, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../PanelContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../PanelContainer:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 709, 926 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "TutorialObjectGrab"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("../PanelContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../PanelContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2.73208, 1 ),
+"update": 0,
+"values": [ Vector2( 709, 926 ), Vector2( 709, 886 ) ]
 }
 
 [sub_resource type="CapsuleMesh" id=6]
@@ -220,6 +283,24 @@ mode = 1
 [node name="CollisionShape" type="CollisionShape" parent="Camera/RayCast/RigidBody"]
 shape = SubResource( 14 )
 
+[node name="LightEffect" type="RayCast" parent="Camera"]
+enabled = true
+cast_to = Vector3( 0, 0, -20 )
+collision_mask = 6
+script = ExtResource( 8 )
+
+[node name="SpotLight" type="SpotLight" parent="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.396723 )
+visible = false
+layers = 3
+light_color = Color( 1, 0.811765, 0.572549, 1 )
+light_energy = 1.6
+light_specular = 2.5
+spot_range = 25.0
+spot_attenuation = 1.1487
+spot_angle = 47.05
+spot_angle_attenuation = 0.217638
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
 
@@ -242,12 +323,29 @@ cull_mask = 1048574
 fov = 90.0
 size = 0.15
 
+[node name="Area" type="Area" parent="CanvasLayer/ViewportContainer/Viewport/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3 )
+
 [node name="Gun" parent="CanvasLayer/ViewportContainer/Viewport/Camera" instance=ExtResource( 7 )]
 transform = Transform( -3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 0.707, -0.699, -0.537 )
 
 [node name="gun001" parent="CanvasLayer/ViewportContainer/Viewport/Camera/Gun" index="0"]
 transform = Transform( 0.779128, 0, -8.88178e-16, 0, 0.380214, 0, 0, 0, 0.296264, 0, 0, 0 )
 layers = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+margin_left = 709.0
+margin_top = 926.0
+margin_right = 1210.0
+margin_bottom = 966.0
+custom_styles/panel = SubResource( 16 )
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer"]
+margin_left = 35.0
+margin_right = 466.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 15 )
+text = "Press [E] to pick up objects."
 
 [node name="Crosshair" type="CenterContainer" parent="CanvasLayer"]
 anchor_right = 1.0
@@ -272,6 +370,7 @@ stretch_mode = 4
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Crosshair"]
 anims/Focus = SubResource( 11 )
 anims/RESET = SubResource( 12 )
+anims/TutorialObjectGrab = SubResource( 17 )
 
 [node name="Capsule" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )

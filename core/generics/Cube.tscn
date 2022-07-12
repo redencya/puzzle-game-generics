@@ -53,14 +53,15 @@ material/0 = null
 shape = SubResource( 4 )
 
 [node name="Label3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12928, 0 )
 cast_shadow = 0
+pixel_size = 0.012
 billboard = 2
 texture = SubResource( 3 )
 script = ExtResource( 3 )
 
 [node name="TextViewport" type="Viewport" parent="Label3D"]
-size = Vector2( 60, 12 )
+size = Vector2( 100, 30 )
 transparent_bg = true
 handle_input_locally = false
 render_target_v_flip = true
@@ -69,8 +70,9 @@ gui_disable_input = true
 [node name="Mode" type="Label" parent="Label3D/TextViewport"]
 margin_right = 43.0
 margin_bottom = 14.0
-rect_min_size = Vector2( 60, 0 )
+rect_min_size = Vector2( 100, 30 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "Square"
 align = 1
+valign = 1
