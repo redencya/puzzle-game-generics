@@ -91,7 +91,6 @@ extents = Vector3( 4, 0.1, 1 )
 size = Vector3( 8, 0.2, 2 )
 
 [node name="Spatial" type="Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="DoorStream" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.75, 0.5, -10.5 )

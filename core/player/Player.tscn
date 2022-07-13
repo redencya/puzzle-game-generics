@@ -248,10 +248,7 @@ fov = 90.0
 size = 0.15
 
 [node name="Muzzle" type="Spatial" parent="Camera"]
-transform = Transform( -3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 0, 0, -1.30596 )
-
-[node name="Muzzle2" type="Spatial" parent="Camera"]
-transform = Transform( -3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 0, 0, -1.65464 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.702943, -0.487537, -1.00121 )
 
 [node name="RayCast" type="RayCast" parent="Camera"]
 process_priority = 1

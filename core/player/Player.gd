@@ -3,7 +3,7 @@ extends KinematicBody
 class_name Player
 
 var gameplay_restriction_mode: int
-var gameplay_bullet
+var gameplay_bullet : PackedScene
 
 var move_speed = 20
 var move_run_speed = 1.25
@@ -39,9 +39,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Game interaction
 	if event.is_action_pressed("shoot") && !$AnimationPlayer.is_playing():
 		var b = gameplay_bullet.instance()
+		b.init($Camera/Muzzle.global_transform, $Camera.global_transform.origin)
 		owner.add_child(b)
-		b.global_transform.origin = $Camera/Muzzle.global_transform.origin
-		b.velocity = $Camera/Muzzle.global_transform.origin.direction_to($Camera/Muzzle2.global_transform.origin) * b.muzzle_velocity
 		$AnimationPlayer.play("GunMove")
 	
 	if event is InputEventMouseMotion:

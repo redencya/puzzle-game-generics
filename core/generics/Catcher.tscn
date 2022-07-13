@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://assets/catcher_off.material" type="Material" id=1]
 [ext_resource path="res://assets/spark.png" type="Texture" id=2]
 [ext_resource path="res://core/generics/Catcher.gd" type="Script" id=3]
 
@@ -30,7 +31,7 @@ material = SubResource( 2 )
 radius = 0.15
 height = 0.3
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=7]
 flags_transparent = true
 flags_do_not_receive_shadows = true
 params_specular_mode = 4
@@ -46,7 +47,7 @@ emission_operator = 0
 emission_on_uv2 = false
 
 [sub_resource type="QuadMesh" id=5]
-material = SubResource( 4 )
+material = SubResource( 7 )
 size = Vector2( 0.03, 0.03 )
 
 [sub_resource type="Curve" id=6]
@@ -56,18 +57,22 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.481445, 1 ), 0.0, 0.0, 0, 
 script = ExtResource( 3 )
 
 [node name="Catcher" type="MeshInstance" parent="."]
+material_override = ExtResource( 1 )
 mesh = SubResource( 1 )
 material/0 = null
 
 [node name="Bullet" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+visible = false
 mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Particles" type="CPUParticles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+emitting = false
 explosiveness = 0.5
 randomness = 0.5
+local_coords = false
 mesh = SubResource( 5 )
 emission_shape = 1
 emission_sphere_radius = 0.3
