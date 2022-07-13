@@ -170,7 +170,7 @@ depth = 20.0
 material = SubResource( 22 )
 
 [node name="ProtoWall7" type="CSGBox" parent="Geometry/Walls"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.75, 6.75, -14.25 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 6.75, -14.25 )
 use_collision = true
 collision_mask = 0
 width = 23.5
@@ -182,13 +182,13 @@ material = SubResource( 22 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3.5, -14 )
 use_collision = true
 collision_mask = 0
-width = 23.5
+width = 22.5
 height = 7.5
 depth = 8.0
 material = SubResource( 22 )
 
 [node name="ProtoWall9" type="CSGBox" parent="Geometry/Walls"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.25, 11.75, -14.25 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.25, 11.75, -8 )
 use_collision = true
 collision_mask = 0
 width = 23.5
@@ -197,7 +197,7 @@ depth = 8.5
 material = SubResource( 22 )
 
 [node name="ProtoWall11" type="CSGBox" parent="Geometry/Walls"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.75, 11.75, -14.25 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 11.75, -14.25 )
 use_collision = true
 collision_mask = 0
 width = 23.5
@@ -206,7 +206,7 @@ depth = 8.5
 material = SubResource( 22 )
 
 [node name="ProtoWall10" type="CSGBox" parent="Geometry/Walls"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 8.5, -14 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 8.5, -7.75 )
 use_collision = true
 collision_mask = 0
 width = 23.5
