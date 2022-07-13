@@ -15,6 +15,7 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pickup"):
+		
 		if get_collider() is Cube && !hold_mode:
 			$Pickup.play()
 			current_body = get_collider()
@@ -25,8 +26,8 @@ func _input(event: InputEvent) -> void:
 			pivot.set_node_b(current_body.get_path())
 			current_body.set_total_angular_axis_lock(true)
 		elif hold_mode:
-			current_body.collision_mask = 15
-			current_body.collision_layer = 2
+			current_body.collision_mask = 31
+			current_body.collision_layer = 66
 			$RigidBody.collision_mask = 0
 			pivot.set_node_b("")
 			current_body.set_total_angular_axis_lock(false)

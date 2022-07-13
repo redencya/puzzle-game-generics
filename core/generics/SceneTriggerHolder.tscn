@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="SceneTriggerHolder" type="Spatial"]
+__meta__ = {
+"_editor_description_": "this will hold all of the scene triggers within a level, in case there are levels which have multiple exits.
+"
+}
