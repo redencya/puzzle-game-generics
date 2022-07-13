@@ -1,36 +1,33 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://core/generics/Shelves.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/kenney_prototype_textures/dark/texture_03.png" type="Texture" id=1]
 [ext_resource path="res://core/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://core/generics/Cube.tscn" type="PackedScene" id=3]
-[ext_resource path="res://levels/TutorialGrab.gd" type="Script" id=4]
-[ext_resource path="res://core/generics/Door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/kenney_prototype_textures/orange/texture_01.png" type="Texture" id=4]
+[ext_resource path="res://addons/kenney_prototype_textures/light/texture_04.png" type="Texture" id=5]
 [ext_resource path="res://core/generics/Button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://core/player/Bullet.tscn" type="PackedScene" id=8]
 
-[sub_resource type="ProceduralSky" id=11]
-sky_top_color = Color( 0.101961, 0, 0.290196, 1 )
+[sub_resource type="ProceduralSky" id=16]
+sky_top_color = Color( 0.254902, 0, 0.290196, 1 )
 sky_horizon_color = Color( 1, 0, 0.447059, 1 )
 sky_curve = 0.15
+sky_energy = 0.79
 ground_bottom_color = Color( 0.101961, 0, 0.290196, 1 )
 ground_horizon_color = Color( 0.776471, 0, 0.4, 1 )
 ground_curve = 0.09
 sun_latitude = -35.0
 
-[sub_resource type="Environment" id=12]
-background_sky = SubResource( 11 )
-background_energy = 0.1
-ambient_light_color = Color( 0, 0.0666667, 0.176471, 1 )
-ambient_light_energy = 0.4
-ambient_light_sky_contribution = 0.0
+[sub_resource type="Environment" id=17]
+background_mode = 2
+background_sky = SubResource( 16 )
+background_energy = 0.5
+ambient_light_color = Color( 0.239216, 0.0431373, 0.133333, 1 )
+ambient_light_sky_contribution = 0.7
 fog_enabled = true
-fog_color = Color( 0, 0, 0, 1 )
-fog_depth_begin = 15.0
+fog_color = Color( 0.811765, 0.247059, 0.564706, 1 )
+fog_depth_curve = 1.5
 tonemap_mode = 4
-tonemap_exposure = 0.68
-tonemap_white = 0.8
-auto_exposure_scale = 0.15
-auto_exposure_max_luma = 0.0
 ss_reflections_enabled = true
 ss_reflections_fade_in = 0.126134
 ss_reflections_fade_out = 10.556
@@ -47,108 +44,319 @@ glow_levels/1 = true
 glow_levels/4 = true
 glow_levels/5 = false
 glow_levels/7 = true
-glow_intensity = 5.0
-glow_strength = 0.6
-glow_bloom = 0.5
+glow_intensity = 1.5
+glow_bloom = 0.16
 glow_bicubic_upscale = true
 glow_high_quality = true
 adjustment_enabled = true
-adjustment_contrast = 0.85
-adjustment_saturation = 0.9
+adjustment_brightness = 0.95
+adjustment_contrast = 0.83
+adjustment_saturation = 0.85
 
-[sub_resource type="BoxShape" id=13]
-extents = Vector3( 4.25, 2.75, 5 )
+[sub_resource type="PlaneMesh" id=18]
+size = Vector2( 20, 20 )
 
-[node name="Spatial" type="Spatial"]
+[sub_resource type="SpatialMaterial" id=21]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 1 )
+uv1_triplanar = true
 
-[node name="ButtonGroup" parent="." instance=ExtResource( 6 )]
-transform = Transform( 0.999999, 0.0011695, -0.00115684, -0.00117019, 0.999999, -0.000582554, 0.00115614, 0.000583931, 0.999999, 12, 0, -3.75 )
-functionality/input_type = 1
-functionality/weight_type = 1
-functionality/cube_type = 0
-functionality/powered = true
-cosmetic/accent_color = Color( 0, 0, 0, 1 )
-general/type = 0
-relations/output = [ NodePath("../DoorStream") ]
+[sub_resource type="SpatialMaterial" id=20]
+flags_transparent = true
+albedo_color = Color( 0.498039, 0.498039, 0.498039, 0.415686 )
 
-[node name="OmniLight" type="OmniLight" parent="ButtonGroup"]
-transform = Transform( 1, 1.35274e-08, 1.96742e-08, 1.38203e-09, 1, -2.33413e-08, -1.39698e-09, -6.98492e-10, 1, -0.00117016, 0.999999, -0.000581264 )
+[sub_resource type="SpatialMaterial" id=22]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 4 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=23]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 5 )
+uv1_triplanar = true
+
+[sub_resource type="BoxShape" id=19]
+extents = Vector3( 7.5, 7.5, 0.25 )
+
+[node name="Level" type="Spatial"]
+
+[node name="Lighting" type="Spatial" parent="."]
+
+[node name="GlobalLight" type="DirectionalLight" parent="Lighting"]
+transform = Transform( 0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 0, 0 )
 layers = 3
-light_color = Color( 0, 0.694118, 1, 1 )
-light_energy = 0.344
-light_specular = 0.0
-omni_range = 38.652
-omni_attenuation = 3.13833
+light_color = Color( 1, 0.835294, 0.87451, 1 )
+light_energy = 0.7
+shadow_enabled = true
+shadow_color = Color( 0.176471, 0, 0.321569, 1 )
 
-[node name="OmniLight2" type="OmniLight" parent="ButtonGroup"]
-transform = Transform( 1, 1.1884e-05, 1.1901e-05, -1.17469e-05, 0.999948, -0.01021, -1.20032e-05, 0.01021, 0.999948, 1.75184, 2.28786, 3.90666 )
-layers = 3
-light_color = Color( 0, 0.694118, 1, 1 )
-light_energy = 0.15
-light_specular = 0.0
-omni_range = 38.652
-omni_attenuation = 3.13833
+[node name="Sky" type="WorldEnvironment" parent="Lighting"]
+environment = SubResource( 17 )
 
-[node name="DoorStream" parent="." instance=ExtResource( 5 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.4, 0, 0 )
+[node name="Geometry" type="Spatial" parent="."]
 
-[node name="Cube" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, -1.625, 1.8, 4.325 )
-
-[node name="Shelves2" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.25 )
-collision_layer = 33
-collision_mask = 0
-
-[node name="Shelves3" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 4.25 )
-collision_layer = 33
-collision_mask = 0
-
-[node name="CSGCombiner" type="CSGCombiner" parent="."]
+[node name="ProtoGround" type="CSGMesh" parent="Geometry"]
 use_collision = true
-collision_layer = 33
+collision_mask = 0
+mesh = SubResource( 18 )
+material = SubResource( 21 )
+
+[node name="ProtoGround2" type="CSGMesh" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20 )
+use_collision = true
+collision_mask = 0
+mesh = SubResource( 18 )
+material = SubResource( 21 )
+
+[node name="ProtoGround4" type="CSGMesh" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.125, 5.1, -20 )
+use_collision = true
+collision_mask = 0
+mesh = SubResource( 18 )
+material = SubResource( 21 )
+
+[node name="ProtoGround3" type="CSGMesh" parent="Geometry"]
+transform = Transform( 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, 19.5, 2.5, -20 )
+use_collision = true
+collision_mask = 0
+mesh = SubResource( 18 )
+material = SubResource( 21 )
+
+[node name="Fence" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 2.75, -3.5 )
+use_collision = true
+collision_mask = 0
+width = 0.25
+height = 7.0
+depth = 13.0
+material = SubResource( 20 )
+
+[node name="Walls" type="Spatial" parent="Geometry"]
+
+[node name="ProtoWall" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.75, 1.5, -9.5 )
+use_collision = true
+collision_mask = 0
+width = 0.5
+height = 3.0
+depth = 41.0
+material = SubResource( 22 )
+
+[node name="ProtoWall2" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, 1.5, 0 )
+use_collision = true
+collision_mask = 0
+width = 0.5
+height = 3.0
+depth = 20.0
+material = SubResource( 22 )
+
+[node name="ProtoWall4" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.75, 9.25, -10 )
+use_collision = true
+collision_mask = 0
+width = 1.5
+height = 12.5
+depth = 40.0
+material = SubResource( 22 )
+
+[node name="ProtoWall6" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, 9.25, 0 )
+use_collision = true
+collision_mask = 0
+width = 1.5
+height = 12.5
+depth = 20.0
+material = SubResource( 22 )
+
+[node name="ProtoWall7" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.75, 6.75, -14.25 )
+use_collision = true
+collision_mask = 0
+width = 23.5
+height = 7.5
+depth = 8.5
+material = SubResource( 22 )
+
+[node name="ProtoWall8" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3.5, -14 )
+use_collision = true
+collision_mask = 0
+width = 23.5
+height = 7.5
+depth = 8.0
+material = SubResource( 22 )
+
+[node name="ProtoWall9" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.25, 11.75, -14.25 )
+use_collision = true
+collision_mask = 0
+width = 23.5
+height = 7.5
+depth = 8.5
+material = SubResource( 22 )
+
+[node name="ProtoWall11" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.75, 11.75, -14.25 )
+use_collision = true
+collision_mask = 0
+width = 23.5
+height = 7.5
+depth = 8.5
+material = SubResource( 22 )
+
+[node name="ProtoWall10" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 8.5, -14 )
+use_collision = true
+collision_mask = 0
+width = 23.5
+height = 7.5
+depth = 8.0
+material = SubResource( 22 )
+
+[node name="ProtoWall12" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.75, 6.75, -33.5 )
+use_collision = true
+collision_mask = 0
+width = 23.5
+height = 7.5
+depth = 8.5
+material = SubResource( 22 )
+
+[node name="ProtoWall13" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3.5, -34 )
+use_collision = true
+collision_mask = 0
+width = 23.5
+height = 7.5
+depth = 8.0
+material = SubResource( 22 )
+
+[node name="ProtoWall14" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.25, 11.75, -33.5 )
+use_collision = true
+collision_mask = 0
+width = 23.5
+height = 7.5
+depth = 8.5
+material = SubResource( 22 )
+
+[node name="ProtoWall15" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.75, 11.75, -33.5 )
+use_collision = true
+collision_mask = 0
+width = 23.5
+height = 7.5
+depth = 8.5
+material = SubResource( 22 )
+
+[node name="ProtoWall16" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 8.5, -34 )
+use_collision = true
+collision_mask = 0
+width = 23.5
+height = 7.5
+depth = 8.0
+material = SubResource( 22 )
+
+[node name="ProtoWall5" type="CSGBox" parent="Geometry/Walls"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 8.75, 9.75 )
+use_collision = true
+collision_mask = 0
+width = 0.5
+height = 13.5
+depth = 20.0
+material = SubResource( 22 )
+
+[node name="Staircase" type="Spatial" parent="Geometry"]
+
+[node name="Platform" type="CSGBox" parent="Geometry/Staircase"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.25, 0.5, -6 )
+use_collision = true
+collision_mask = 0
+width = 7.0
+height = 1.0
+depth = 4.5
+material = SubResource( 23 )
+
+[node name="Platform2" type="CSGBox" parent="Geometry/Staircase"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.25, 1.75, 3.5 )
+use_collision = true
+collision_mask = 0
+width = 12.0
+height = 3.5
+depth = 4.5
+material = SubResource( 23 )
+
+[node name="Box" type="CSGBox" parent="Geometry/Staircase"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 4.75, 8.5 )
+use_collision = true
+collision_mask = 0
+width = 2.5
+height = 2.5
+depth = 2.5
+material = SubResource( 23 )
+
+[node name="Box2" type="CSGBox" parent="Geometry/Staircase"]
+transform = Transform( -0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, -7.75, 1.7, -4.5 )
+use_collision = true
+collision_mask = 0
+width = 1.4
+height = 1.4
+depth = 1.4
+material = SubResource( 23 )
+
+[node name="Platform3" type="CSGBox" parent="Geometry/Staircase"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, 6.25 )
+use_collision = true
+collision_mask = 0
+width = 14.0
+height = 7.0
+depth = 6.5
+material = SubResource( 23 )
+
+[node name="Platform4" type="CSGBox" parent="Geometry/Staircase"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 6.75, 1 )
+use_collision = true
+collision_mask = 0
+width = 4.0
+height = 0.5
+depth = 4.0
+material = SubResource( 23 )
+
+[node name="Step" type="CSGBox" parent="Geometry/Staircase"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.5, 0.25, -6 )
+use_collision = true
+collision_mask = 0
+width = 7.0
+height = 0.5
+depth = 1.0
+material = SubResource( 23 )
+
+[node name="Bounds" type="StaticBody" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -9.75 )
 collision_mask = 0
 
-[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.75, 2, 0 )
-invert_faces = true
-width = 18.5
-height = 4.0
-depth = 11.0
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/Bounds"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4.75, -20 )
+shape = SubResource( 19 )
 
-[node name="CSGBox5" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8, 2, 0 )
-invert_faces = true
-width = 12.0
-height = 4.0
-depth = 11.0
+[node name="InteractionObjects" type="Spatial" parent="."]
 
-[node name="CSGBox3" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.75, 2, -16 )
-invert_faces = true
-width = 18.5
-height = 4.0
-depth = 11.0
+[node name="Cubes" type="Spatial" parent="InteractionObjects"]
 
-[node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, -5.75 )
-invert_faces = true
-width = 7.0
-height = 4.0
-depth = 11.0
+[node name="Cube" parent="InteractionObjects/Cubes" instance=ExtResource( 3 )]
+transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -7.5, 1.78, -7.25 )
 
-[node name="CSGBox4" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.425, 1.35, 0 )
-invert_faces = true
-width = 1.0
-height = 2.65
+[node name="InputStream" type="Spatial" parent="."]
 
-[node name="Sky" type="WorldEnvironment" parent="."]
-environment = SubResource( 12 )
+[node name="ButtonGroup" parent="InputStream" instance=ExtResource( 6 )]
+transform = Transform( 0.999999, 0.0011695, -0.00115684, -0.00117019, 0.999999, -0.000582554, 0.00115614, 0.000583931, 0.999999, 7.75, 0.0547061, -7.25 )
+
+[node name="Events" type="Spatial" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.25, 1, -16 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.11835, -23.5 )
 gameplay_bullet = ExtResource( 8 )
 move_speed = 4.5
 move_run_speed = 1.65
@@ -160,39 +368,3 @@ physics_falling = 35.0
 physics_rising = 60.0
 physics_jump_force = 11.0
 physics_collision_push = 1.0
-
-[node name="Area" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.75 )
-script = ExtResource( 4 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 2, 0 )
-shape = SubResource( 13 )
-
-[node name="SpotLight2" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.25, 3.75, 3.5 )
-layers = 3
-light_color = Color( 1, 0.847059, 0.662745, 1 )
-light_energy = 0.4
-
-[node name="SpotLight4" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.25, 3.75, -17.75 )
-layers = 3
-light_color = Color( 1, 0.847059, 0.662745, 1 )
-light_energy = 0.4
-
-[node name="SpotLight5" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 9.5, 3.75, -17.75 )
-layers = 3
-light_color = Color( 1, 0.847059, 0.662745, 1 )
-light_energy = 0.4
-
-[node name="SpotLight3" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 11.75, 3.75, -3.5 )
-layers = 3
-light_color = Color( 1, 0.847059, 0.662745, 1 )
-light_energy = 0.4
-spot_range = 6.135
-
-[connection signal="body_entered" from="Area" to="Area" method="_on_Area_body_entered"]
-[connection signal="body_exited" from="Area" to="Area" method="_on_Area_body_exited"]

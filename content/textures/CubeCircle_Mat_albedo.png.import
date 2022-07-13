@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/texture_05.png-57f4196ea276097368d03084372aa101.s3tc.stex"
-path.etc2="res://.import/texture_05.png-57f4196ea276097368d03084372aa101.etc2.stex"
+path.s3tc="res://.import/CubeCircle_Mat_albedo.png-0504c1d9990cb17d3bd7e28891eb3c73.s3tc.stex"
+path.etc2="res://.import/CubeCircle_Mat_albedo.png-0504c1d9990cb17d3bd7e28891eb3c73.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/kenney_prototype_textures/orange/texture_05.png"
-dest_files=[ "res://.import/texture_05.png-57f4196ea276097368d03084372aa101.s3tc.stex", "res://.import/texture_05.png-57f4196ea276097368d03084372aa101.etc2.stex" ]
+source_file="res://content/textures/CubeCircle_Mat_albedo.png"
+dest_files=[ "res://.import/CubeCircle_Mat_albedo.png-0504c1d9990cb17d3bd7e28891eb3c73.s3tc.stex", "res://.import/CubeCircle_Mat_albedo.png-0504c1d9990cb17d3bd7e28891eb3c73.etc2.stex" ]
 
 [params]
 

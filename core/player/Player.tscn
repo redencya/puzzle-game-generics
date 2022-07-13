@@ -269,7 +269,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.702943, -0.487537, -1.00121 
 process_priority = 1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3 )
 enabled = true
-cast_to = Vector3( 0, 0, -1.8 )
+cast_to = Vector3( 0, 0, -2.75 )
 collision_mask = 18
 script = ExtResource( 3 )
 
@@ -296,7 +296,6 @@ mode = 1
 shape = SubResource( 14 )
 
 [node name="LightEffect" type="RayCast" parent="Camera"]
-enabled = true
 cast_to = Vector3( 0, 0, -20 )
 collision_mask = 6
 script = ExtResource( 8 )
@@ -317,6 +316,7 @@ spot_angle_attenuation = 0.217638
 follow_viewport_enable = true
 
 [node name="ViewportContainer" type="ViewportContainer" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -327,10 +327,11 @@ size = Vector2( 1920, 1080 )
 size_override_stretch = true
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="Camera" type="Camera" parent="CanvasLayer/ViewportContainer/Viewport"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.675726, -0.340189 )
+visible = false
 cull_mask = 1048574
 fov = 90.0
 size = 0.15

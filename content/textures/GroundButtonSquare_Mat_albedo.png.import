@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/texture_05.png-57f4196ea276097368d03084372aa101.s3tc.stex"
-path.etc2="res://.import/texture_05.png-57f4196ea276097368d03084372aa101.etc2.stex"
+path.s3tc="res://.import/GroundButtonSquare_Mat_albedo.png-8878bacc6f7cff18941f37dc0b418b4c.s3tc.stex"
+path.etc2="res://.import/GroundButtonSquare_Mat_albedo.png-8878bacc6f7cff18941f37dc0b418b4c.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/kenney_prototype_textures/orange/texture_05.png"
-dest_files=[ "res://.import/texture_05.png-57f4196ea276097368d03084372aa101.s3tc.stex", "res://.import/texture_05.png-57f4196ea276097368d03084372aa101.etc2.stex" ]
+source_file="res://content/textures/GroundButtonSquare_Mat_albedo.png"
+dest_files=[ "res://.import/GroundButtonSquare_Mat_albedo.png-8878bacc6f7cff18941f37dc0b418b4c.s3tc.stex", "res://.import/GroundButtonSquare_Mat_albedo.png-8878bacc6f7cff18941f37dc0b418b4c.etc2.stex" ]
 
 [params]
 

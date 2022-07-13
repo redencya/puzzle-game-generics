@@ -26,7 +26,7 @@ var powered
 var accent_color
 
 func _ready() -> void:
-	for target in output:
+	if output: for target in output:
 		connect("stream_input", get_node(target), "_input_stream_recieved")
 	if weight_type == 1:
 		var text_dict = {
