@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://core/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/GeneralCursor.svg" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/Gun.glb" type="PackedScene" id=7]
 [ext_resource path="res://core/player/LightEffect.gd" type="Script" id=8]
 [ext_resource path="res://assets/READEXPRO-MEDIUM.TTF" type="DynamicFontData" id=9]
+[ext_resource path="res://assets/gun1.ogg" type="AudioStream" id=10]
 
 [sub_resource type="SphereShape" id=14]
 radius = 0.0452232
@@ -147,7 +148,7 @@ height = 0.3
 
 [sub_resource type="Animation" id=8]
 resource_name = "GunMove"
-length = 0.5
+length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanvasLayer/ViewportContainer/Viewport/Camera/Gun:translation")
 tracks/0/interp = 1
@@ -179,10 +180,24 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5 ),
+"times": PoolRealArray( 0, 0.2, 0.6 ),
 "transitions": PoolRealArray( 0.392292, 1.41421, 2.14355 ),
 "update": 0,
 "values": [ 2.0, 5.0, 2.0 ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.16,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=9]
@@ -396,6 +411,10 @@ shape = SubResource( 3 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/GunMove = SubResource( 8 )
 anims/RESET = SubResource( 9 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+bus = "SFX"
 
 [connection signal="highlight_object" from="Camera/RayCast" to="CanvasLayer/Crosshair" method="_on_RayCast_highlight_object"]
 

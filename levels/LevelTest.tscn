@@ -98,9 +98,6 @@ relations/input = [ NodePath("../ButtonGroup") ]
 
 [node name="ButtonGroup" parent="." instance=ExtResource( 3 )]
 transform = Transform( 0.999999, 0.0011695, -0.00115684, -0.00117019, 0.999999, -0.000582554, 0.00115614, 0.000583931, 0.999999, 5.25404, -1.25703, -3.99104 )
-functionality/input_type = 1
-functionality/weight_type = 1
-functionality/cube_type = 0
 functionality/powered = false
 general/type = 0
 relations/output = [ NodePath("../DoorStream") ]

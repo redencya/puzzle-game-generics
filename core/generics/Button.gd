@@ -8,6 +8,15 @@ const TOTAL_ANGULAR_LOCK = [
 	PhysicsServer.BODY_AXIS_ANGULAR_Z
 ]
 
+const MATERIAL_DEFAULT = preload("res://assets/Ground_Button_Mat.material")
+const MATERIALS = [
+	preload("res://assets/GroundButtonSquare_Mat_.material"),
+	preload("res://assets/GroundButtonTriangle_Mat.material"),
+	preload("res://assets/GroundButtonHexagon_Mat.material")
+	]
+
+onready var meshes = [$ButtonBaseGround/Mesh, $ButtonPressGround/Mesh]
+
 var input_type
 var weight_type
 var cube_type
@@ -26,8 +35,11 @@ func _ready() -> void:
 			2 : "Circle"
 		}
 		$Sprite3D/TextViewport/Mode.set_text(text_dict[cube_type])
+		for mesh in meshes:
+			mesh.mesh.surface_set_material(0, MATERIALS[cube_type])
 
 func _process(delta: float) -> void:
+	var meshes_immediate = [$ButtonBaseGround/Mesh, $ButtonPressGround/Mesh]
 	if Engine.is_editor_hint() && weight_type == 1:
 		var text_dict = {
 			0 : "Square",
@@ -35,6 +47,11 @@ func _process(delta: float) -> void:
 			2 : "Circle"
 		}
 		$Sprite3D/TextViewport/Mode.set_text(text_dict[cube_type])
+		for mesh in meshes_immediate:
+			mesh.mesh.surface_set_material(0, MATERIALS[cube_type])
+	elif Engine.is_editor_hint():
+		for mesh in meshes_immediate:
+			mesh.mesh.surface_set_material(0, MATERIAL_DEFAULT)
 
 func _set(property: String, value) -> bool:
 	var return_value = true
@@ -99,7 +116,7 @@ func _get_property_list() -> Array:
 				name = "functionality/cube_type",
 				type = TYPE_INT,
 				hint = PROPERTY_HINT_ENUM,
-				hint_string = "Square,Triangle,Circle"
+				hint_string = "Square,Triangle,Hexagon"
 			})
 		
 			properties.append({
