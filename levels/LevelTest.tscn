@@ -249,3 +249,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.45, 0 )
 
 [node name="Catcher" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.76566, 3.29479, 7.25 )
+state = true

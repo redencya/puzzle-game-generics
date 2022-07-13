@@ -25,6 +25,18 @@ func _process(delta: float) -> void:
 	$CanvasLayer/ViewportContainer/Viewport/Camera.global_transform = $Camera.global_transform
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Window interaction
+	if event.is_action_pressed("fullscreen"):
+		OS.window_fullscreen = !OS.window_fullscreen
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED * int(OS.is_window_fullscreen()))
+	if event.is_action_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		if event is InputEventMouseButton:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		return
+
+	# Game interaction
 	if event.is_action_pressed("shoot") && !$AnimationPlayer.is_playing():
 		var b = gameplay_bullet.instance()
 		owner.add_child(b)
@@ -32,10 +44,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		b.velocity = $Camera/Muzzle.global_transform.origin.direction_to($Camera/Muzzle2.global_transform.origin) * b.muzzle_velocity
 		$AnimationPlayer.play("GunMove")
 	
-	if event.is_action_pressed("fullscreen"):
-		OS.set_window_fullscreen(!OS.is_window_fullscreen())
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED * int(OS.is_window_fullscreen()))
-
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(-event.relative.x)*0.3)
 		$Camera.rotation.x = clamp($Camera.rotation.x + (deg2rad(-event.relative.y)*0.3), deg2rad(-89.9), deg2rad(89.9))
